@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="build">
+	<path id="build.classpath">
+		<pathelement location="classes"/>
+	</path>
+	<target name="init">
+		<mkdir dir="classes"/>
+	</target>
+	<target name="clean">
+		<delete dir="classes"/>
+	</target>
+	<target depends="init" name="build">
+		<javac srcdir="." destdir="classes" source="1.5" target="1.5" fork="yes">
+			<classpath refid="build.classpath"/>
+			<include name="Temporada.java"/>
+			<include name="Sala.java"/>
+			<include name="Apresentacao.java"/>
+			<include name="FormaPagamento.java"/>
+			<include name="DetalhesCartao.java"/>
+			<include name="FormadePagamentoCompra.java"/>
+			<include name="Compra.java"/>
+			<include name="Pessoa.java"/>
+			<include name="Preferencia.java"/>
+			<include name="TipoEspetaculo.java"/>
+			<include name="Espetaculo.java"/>
+			<include name="Artista.java"/>
+		</javac>
+	</target>
+</project>
