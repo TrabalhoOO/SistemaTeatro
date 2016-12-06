@@ -7,7 +7,8 @@ public class Compra {
 	private int assentoAdquiridos;
 	private double valorTotal;
 	private static int genID = 0;
-	public Apresentacao fk_Apresentacao;
-	public Pessoa fk_Pessoa;
-	public FormadePagamentoCompra formadePagamentoCompra;
+	private Apresentacao fk_Apresentacao;
+	private Pessoa fk_Pessoa;
+	private FormaPagamento fk_FormaPagamento;
+	private Cartao fk_Cartao;
 }
