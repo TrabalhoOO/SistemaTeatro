@@ -10,7 +10,17 @@ import java.io.LineNumberReader;
 public class GeradorID {
 
     public int genID(Contavel contavel) {
-        File arquivo = contavel.getArq();
+        if(!contavel.getArq().exists())
+        {
+            try{
+            contavel.getArq().createNewFile();
+            }
+            catch(IOException e)
+            {
+                System.out.println("Não foi possível criar o arquivo");
+            }
+        }
+        File arquivo = contavel.getArq().getAbsoluteFile();
         long tamanho = arquivo.length();
         try {
             FileInputStream fs = new FileInputStream(arquivo);

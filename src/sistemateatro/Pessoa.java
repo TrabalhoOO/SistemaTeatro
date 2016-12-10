@@ -8,7 +8,6 @@ import java.util.LinkedList;
 public class Pessoa implements Comparable<Pessoa>, Contavel {
 
     private int idPessoa;
-    private static int genID = 0;
     private String nome;
     private String endereco;
     private String telefone;
@@ -23,7 +22,7 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
     private int nivelAcesso;
     private LinkedList<Preferencia> preferencia = new LinkedList<>();
     private LinkedList<Compra> compra = new LinkedList<>();
-    private static final File arq = new File("", "Pessoa.txt");
+    private static final File arq = new File("Dados","Pessoa.txt");
     public static final String UTF8_BOM = "\uFEFF";
 
     public Pessoa() {
@@ -188,9 +187,14 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
     }
 
     public static void escrever(Pessoa pessoa) {
-        PrintWriter printWriter = null;
+ 
+        FileWriter fileWriter = null;
+        BufferedWriter bufferedWriter=null;
         try {
-            arq.createNewFile();
+            if(!arq.exists())
+            {
+                arq.createNewFile();
+            }
             //Devemos passar no construtor do FileWriter qual arquivo
             // vamos manipular.
             // Esse construtor aceita dois tipos de parâmetros,
@@ -201,67 +205,74 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
             // o novo conteúdo.
             // Se não usar o 2° parâmetro, ele por padrão será false.
             //O mais importante, essa linha abre o fluxo do arquivo
-            FileWriter fileWriter = new FileWriter(arq, true);
+            //FileWriter fileWriter = new FileWriter(arq, true);
 
             //Agora vamos usar a classe PrintWriter para escrever
             //fisicamente no arquivo.
             //Precisamos passar o objeto FileReader em seu construtor
-            printWriter = new PrintWriter(fileWriter);
+            fileWriter = new FileWriter(arq.getAbsolutePath(),true);
+            bufferedWriter = new BufferedWriter(fileWriter);
+            
+            bufferedWriter.newLine();
 
-            //Agora vamos escrever no arquivo com o método  println(),
-            // que nos permite escrever linha a linha no arquivo
-            printWriter.println("");
-
-            printWriter.print(pessoa.getIdPessoa());
-            printWriter.print(";");
-            printWriter.print(pessoa.getNome());
-            printWriter.print(";");
-            printWriter.print(pessoa.getEndereco());
-            printWriter.print(";");
-            printWriter.print(pessoa.getTelefone());
-            printWriter.print(";");
-            printWriter.print(pessoa.getEmail());
-            printWriter.print(";");
-            printWriter.print(pessoa.getLocalTrabalho());
-            printWriter.print(";");
-            printWriter.print(pessoa.getEnderecoComercial());
-            printWriter.print(";");
-            printWriter.print(pessoa.getDataNasc());
-            printWriter.print(";");
-            printWriter.print(pessoa.getCPF());
-            printWriter.print(";");
-            printWriter.print(pessoa.getRG());
-            printWriter.print(";");
-            printWriter.print(pessoa.getLogin());
-            printWriter.print(";");
-            printWriter.print(pessoa.getSenha());
-            printWriter.print(";");
+            bufferedWriter.write(Integer.toString(pessoa.getIdPessoa()));
+            bufferedWriter.write(";");
+            bufferedWriter.write(pessoa.getNome());
+            bufferedWriter.write(";");
+            bufferedWriter.write(pessoa.getEndereco());
+            bufferedWriter.write(";");
+            bufferedWriter.write(pessoa.getTelefone());
+            bufferedWriter.write(";");
+            bufferedWriter.write(pessoa.getEmail());
+            bufferedWriter.write(";");
+            bufferedWriter.write(pessoa.getLocalTrabalho());
+            bufferedWriter.write(";");
+            bufferedWriter.write(pessoa.getEnderecoComercial());
+            bufferedWriter.write(";");
+            bufferedWriter.write(pessoa.getDataNasc().toString());
+            bufferedWriter.write(";");
+            bufferedWriter.write(pessoa.getCPF());
+            bufferedWriter.write(";");
+            bufferedWriter.write(pessoa.getRG());
+            bufferedWriter.write(";");
+            bufferedWriter.write(pessoa.getLogin());
+            bufferedWriter.write(";");
+            bufferedWriter.write(pessoa.getSenha());
+            bufferedWriter.write(";");
 
             //o método flush libera a escrita no arquivo
-            printWriter.flush();
+            fileWriter.flush();
+            bufferedWriter.flush();
+        
         } catch (IOException e) {
             System.out.println("Não foi possível escrever no arquivo");
         } finally {
-            printWriter.close();
+            try {
+                fileWriter.close();
+                bufferedWriter.close();
+            } catch (IOException e) {
+                System.out.println("Não foi possível alterar o arquivo");
+            }
         }
     }
 
     
 
     public static void RelPessoas() {
-        Reader fileReader = null;
+        FileReader fileReader = null;
         boolean existe = arq.exists();
         Pessoa pessoa;
         LinkedList<Pessoa> listaTodos = null;
+        if (existe) {
         try {
-            if (existe) {
-                fileReader = new InputStreamReader(new FileInputStream(arq), "UTF8");
+            
+                fileReader = new FileReader(arq.getAbsolutePath());
                 BufferedReader br = new BufferedReader(fileReader);
                 String linha = br.readLine();
                 listaTodos = new LinkedList<>();
                 while (linha != null) {
                     if (!(linha.equals(""))) {
-                        linha = Pessoa.removeUTF8BOM(linha);
+                        //linha = Pessoa.removeUTF8BOM(linha);
                         String[] dados = linha.split(";");
                         //System.out.println(dados[0]);
                         int t = Integer.parseInt(dados[0]);
@@ -288,7 +299,7 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
 
             }
 
-        } catch (IOException e) {
+         catch (IOException e) {
             System.out.println("Não foi possível alterar o arquivo");
         } finally {
             try {
@@ -298,6 +309,8 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
             }
 
         }
+        }
+    
         if (listaTodos != null) {
             Collections.sort(listaTodos);
             for (Pessoa e : listaTodos) {
