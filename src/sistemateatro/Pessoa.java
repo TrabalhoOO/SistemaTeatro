@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 
+
+
 public class Pessoa implements Comparable<Pessoa>, Contavel {
 
     private int idPessoa;
@@ -22,34 +24,13 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
     private int nivelAcesso;
     private LinkedList<Preferencia> preferencia = new LinkedList<>();
     private LinkedList<Compra> compra = new LinkedList<>();
-    private static final File arq = new File("Dados","Pessoa.txt");
+    private static final File arq = new File("Dados", "Pessoa.txt");
     public static final String UTF8_BOM = "\uFEFF";
 
     public Pessoa() {
     }
 
-    public Pessoa(String nome, String endereco, String telefone, String email, String local, String enderecocomercial, Date data, String cpf, String rg, String login, String senha, int nivel) {
-        GeradorID gerador = new GeradorID();
-        if (gerador.genID(this) > 0) {
-            this.idPessoa = gerador.genID(this);
-        } else {
-            System.out.println("Erro na inserção");
-        }
-        this.nome = nome;
-        this.endereco = endereco;
-        this.telefone = telefone;
-        this.email = email;
-        this.localTrabalho = local;
-        this.enderecoComercial = enderecocomercial;
-        this.dataNasc = data; //tratar quando for ler
-        this.CPF = cpf;
-        this.RG = rg;
-        this.login = login;
-        this.senha = senha;
-        this.nivelAcesso = nivel;
-        Pessoa.escrever(this);
-    }
-
+   
     public LinkedList<Preferencia> getPreferencia() {
         return preferencia;
     }
@@ -169,9 +150,9 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
     public void setNivelAcesso(int nivelAcesso) {
         this.nivelAcesso = nivelAcesso;
     }
-    
+
     @Override
-     public int compareTo(Pessoa outro) {
+    public int compareTo(Pessoa outro) {
         return this.getNome().compareTo(outro.getNome());
     }
 
@@ -180,77 +161,101 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         return arq;
     }
 
-    public static void escrever(Pessoa pessoa) {
- 
-        FileWriter fileWriter = null;
-        BufferedWriter bufferedWriter=null;
-        try {
-            if(!arq.exists())
-            {
-                arq.createNewFile();
-            }
-            //Devemos passar no construtor do FileWriter qual arquivo
-            // vamos manipular.
-            // Esse construtor aceita dois tipos de parâmetros,
-            // File ou String.
-            //O parâmetro true indica que reescrevemos no arquivo
-            // sem apagar o que já existe.
-            // O false apagaria o conteúdo do arquivo e escreveria
-            // o novo conteúdo.
-            // Se não usar o 2° parâmetro, ele por padrão será false.
-            //O mais importante, essa linha abre o fluxo do arquivo
-            //FileWriter fileWriter = new FileWriter(arq, true);
-
-            //Agora vamos usar a classe PrintWriter para escrever
-            //fisicamente no arquivo.
-            //Precisamos passar o objeto FileReader em seu construtor
-            fileWriter = new FileWriter(arq.getAbsolutePath(),true);
-            bufferedWriter = new BufferedWriter(fileWriter);
-            
-            bufferedWriter.newLine();
-
-            bufferedWriter.write(Integer.toString(pessoa.getIdPessoa()));
-            bufferedWriter.write(";");
-            bufferedWriter.write(pessoa.getNome());
-            bufferedWriter.write(";");
-            bufferedWriter.write(pessoa.getEndereco());
-            bufferedWriter.write(";");
-            bufferedWriter.write(pessoa.getTelefone());
-            bufferedWriter.write(";");
-            bufferedWriter.write(pessoa.getEmail());
-            bufferedWriter.write(";");
-            bufferedWriter.write(pessoa.getLocalTrabalho());
-            bufferedWriter.write(";");
-            bufferedWriter.write(pessoa.getEnderecoComercial());
-            bufferedWriter.write(";");
-            bufferedWriter.write(pessoa.getDataNasc().toString());
-            bufferedWriter.write(";");
-            bufferedWriter.write(pessoa.getCPF());
-            bufferedWriter.write(";");
-            bufferedWriter.write(pessoa.getRG());
-            bufferedWriter.write(";");
-            bufferedWriter.write(pessoa.getLogin());
-            bufferedWriter.write(";");
-            bufferedWriter.write(pessoa.getSenha());
-            bufferedWriter.write(";");
-
-            //o método flush libera a escrita no arquivo
-            fileWriter.flush();
-            bufferedWriter.flush();
-        
-        } catch (IOException e) {
-            System.out.println("Não foi possível escrever no arquivo");
-        } finally {
-            try {
-                fileWriter.close();
-                bufferedWriter.close();
-            } catch (IOException e) {
-                System.out.println("Não foi possível alterar o arquivo");
-            }
-        }
+   public void buscaID(int id) {
     }
 
-    
+    public static boolean buscaLogin(String login) {
+        Reader fileReader = null;
+        boolean existe = arq.exists();
+        System.out.println(existe);
+        try {
+            if (existe) {
+                fileReader = new FileReader(arq.getAbsolutePath());
+                BufferedReader br = new BufferedReader(fileReader);
+                String linha = br.readLine();
+                while (linha != null) {
+                    linha = Pessoa.removeUTF8BOM(linha);
+                    if (!(linha.equals(""))) {
+                        String[] dados = linha.split(";|\\s");
+                        if (login.equals(dados[10])) {
+                            System.out.println("Login já existente. Digite novamente: ");
+                            return true;
+                        }
+                    }
+                    linha = br.readLine();
+                }
+                return false;
+            }
+
+        } catch (IOException e) {
+            System.out.println("Não foi possível alterar o arquivo");
+        } finally {
+            if(fileReader!=null){
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                System.out.println("Não foi possível fechar o arquivo");
+            }
+            }
+            else{return false;}
+     
+        }
+        
+        return false;
+    }
+
+    public Pessoa Login(String login, String senha) {
+        Reader fileReader = null;
+        boolean existe = arq.exists();
+        try {
+            if (existe) {
+                fileReader = new FileReader(arq.getAbsolutePath());
+                BufferedReader br = new BufferedReader(fileReader);
+                String linha = br.readLine();
+                Pessoa pessoa;
+                while (linha != null) {
+                    linha = Pessoa.removeUTF8BOM(linha);
+                    if (!(linha.equals(""))) {
+                        String[] dados = linha.split(";|\\s");
+                        if (login.equals(dados[10])) {
+                            if (senha.equals(dados[11])) {
+                                pessoa = new Pessoa();
+                                pessoa.setIdPessoa(Integer.parseInt(dados[0]));
+                                pessoa.setNome(dados[1]);
+                                pessoa.setEndereco(dados[2]);
+                                pessoa.setTelefone(dados[3]);
+                                pessoa.setEmail(dados[4]);
+                                pessoa.setLocalTrabalho(dados[5]);
+                                pessoa.setEnderecoComercial(dados[6]);
+                                pessoa.setDataNasc(Long.parseLong(dados[7]));
+                                pessoa.setCPF(dados[8]);
+                                pessoa.setRG(dados[9]);
+                                pessoa.setLogin(dados[10]);
+                                pessoa.setSenha(dados[11]);
+                                pessoa.setNivelAcesso(Integer.parseInt(dados[12]));
+                            } else {
+                                System.out.println("Senha Incorreta");
+                                return null;
+                            }
+                        }
+                    }
+                    linha = br.readLine();
+                }
+            }
+
+        } catch (IOException e) {
+            System.out.println("Não foi possível alterar o arquivo");
+        } finally {
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                System.out.println("Não foi possível fechar o arquivo");
+            }
+
+        }
+        System.out.println("Login inexistente");
+        return null;
+    }
 
     public static void RelPessoas() {
         FileReader fileReader = null;
@@ -258,19 +263,19 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         Pessoa pessoa;
         LinkedList<Pessoa> listaTodos = null;
         if (existe) {
-        try {
-            
+            try {
+
                 fileReader = new FileReader(arq.getAbsolutePath());
                 BufferedReader br = new BufferedReader(fileReader);
                 String linha = br.readLine();
                 listaTodos = new LinkedList<>();
                 while (linha != null) {
+                    linha = Pessoa.removeUTF8BOM(linha);
                     if (!(linha.equals(""))) {
+                        
                         String[] dados = linha.split(";");
-                        int t = Integer.parseInt(dados[0]);
                         pessoa = new Pessoa();
-
-                        pessoa.setIdPessoa(t);
+                        pessoa.setIdPessoa(Integer.parseInt(dados[0]));
                         pessoa.setNome(dados[1]);
                         pessoa.setEndereco(dados[2]);
                         pessoa.setTelefone(dados[3]);
@@ -282,27 +287,25 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
                         pessoa.setRG(dados[9]);
                         pessoa.setLogin(dados[10]);
                         pessoa.setSenha(dados[11]);
-
+                        pessoa.setNivelAcesso(Integer.parseInt(dados[12]));
                         listaTodos.add(pessoa);
 
                     }
                     linha = br.readLine();
                 }
 
-            }
-
-         catch (IOException e) {
-            System.out.println("Não foi possível alterar o arquivo");
-        } finally {
-            try {
-                fileReader.close();
             } catch (IOException e) {
                 System.out.println("Não foi possível alterar o arquivo");
-            }
+            } finally {
+                try {
+                    fileReader.close();
+                } catch (IOException e) {
+                    System.out.println("Não foi possível alterar o arquivo");
+                }
 
+            }
         }
-        }
-    
+
         if (listaTodos != null) {
             Collections.sort(listaTodos);
             for (Pessoa e : listaTodos) {
@@ -312,8 +315,7 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         }
 
     }
-
-    public void imprimeDados() {
+public void imprimeDados() {
         System.out.println("\nId:" + this.getIdPessoa());
         System.out.println("Nome:" + this.getNome());
         System.out.println("Endereço: " + this.getEndereco());
@@ -325,7 +327,16 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         System.out.println("CPF: " + this.getCPF());
         System.out.println("RG: " + this.getRG());
         System.out.println("Login: " + this.getLogin());
+        if (this.getNivelAcesso() == 0) {
+            System.out.println("Nível de Acesso: ADMINISTRADOR");
+        } else {
+            System.out.println("Nível de Acesso: ESPECTADOR");
+        }
     }
-
-   
+private static String removeUTF8BOM(String s) {
+        if (s.startsWith(UTF8_BOM)) {
+            s = s.substring(1);
+        }
+        return s;
+    }
 }
