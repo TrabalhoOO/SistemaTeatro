@@ -6,5 +6,5 @@ public class Preferencia {
 	private int idPreferencia;
 	private static int genID = 0;
 	public TipoEspetaculo fk_TipoDeEspetaculo;
-	public LinkedList<Pessoa> fk_Pessoa = LinkedList<Pessoa>();
+	public LinkedList<Pessoa> fk_Pessoa;
 }
