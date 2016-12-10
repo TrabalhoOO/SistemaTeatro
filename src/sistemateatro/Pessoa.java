@@ -175,12 +175,6 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         return this.getNome().compareTo(outro.getNome());
     }
 
-    private static String removeUTF8BOM(String s) {
-        if (s.startsWith(UTF8_BOM)) {
-            s = s.substring(1);
-        }
-        return s;
-    }
     @Override
     public File getArq() {
         return arq;
@@ -272,9 +266,7 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
                 listaTodos = new LinkedList<>();
                 while (linha != null) {
                     if (!(linha.equals(""))) {
-                        //linha = Pessoa.removeUTF8BOM(linha);
                         String[] dados = linha.split(";");
-                        //System.out.println(dados[0]);
                         int t = Integer.parseInt(dados[0]);
                         pessoa = new Pessoa();
 
