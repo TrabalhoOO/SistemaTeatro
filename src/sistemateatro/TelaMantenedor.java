@@ -2,8 +2,8 @@ package sistemateatro;
 
 import java.util.Scanner;
 
-public class TelaMantenedor extends Tela {
-
+public class TelaMantenedor {
+    private Pessoa pessoa;
     public TelaMantenedor(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
@@ -39,6 +39,8 @@ public class TelaMantenedor extends Tela {
             switch (opcao) {
                 case 1:
                     this.ConstruirTelaPessoa();
+                    break;
+                default:
                     break;
             }
             System.out.println("Usuario:" + this.getPessoa().getNome() + "\t\t\tMenu\n");

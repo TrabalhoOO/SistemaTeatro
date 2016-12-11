@@ -5,14 +5,6 @@
  */
 
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import sistemateatro.Dao;
-import sistemateatro.Espectador;
 import sistemateatro.Pessoa;
 import sistemateatro.PessoaDao;
 import sistemateatro.Tela;
@@ -31,8 +23,8 @@ public class SistemaTeatro {
             
             }
             Tela tela = new Tela();
-            tela.RealizarLogin();
-            
+            tela.TelaInicial();
             Pessoa.RelPessoas();
+            System.exit(0);
     }
 }
