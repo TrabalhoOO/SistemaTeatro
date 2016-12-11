@@ -3,8 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jpdia/Documents/NetBeansProjects/SistemaTeatro/src/SistemaTeatro.java</file>
-            <file>file:/C:/Users/jpdia/Documents/NetBeansProjects/SistemaTeatro/src/sistemateatro/Espectador.java</file>
+            <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/Compra.java</file>
+            <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/GeradorID.java</file>
+            <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/Pessoa.java</file>
+            <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/Dao.java</file>
+            <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/Tela.java</file>
+            <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/PessoaDao.java</file>
+            <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/SistemaTeatro.java</file>
+            <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/TelaEspectador.java</file>
+            <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/TelaMantenedor.java</file>
         </group>
     </open-files>
 </project-private>
