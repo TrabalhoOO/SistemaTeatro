@@ -1,17 +1,15 @@
-
 package sistemateatro;
 
 import java.util.Scanner;
 
 public class TelaMantenedor extends Tela {
-    
-    public TelaMantenedor(Pessoa pessoa)
-    {
+
+    public TelaMantenedor(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
-    public void ConstruirTelaGeral()
-    {
-        System.out.println("Usuario:"+this.getPessoa().getNome()+"\t\t\tMenu\n");
+
+    public void ConstruirTelaGeral() {
+        System.out.println("Usuario:" + this.getPessoa().getNome() + "\t\t\tMenu\n");
         System.out.println("Escolha sua opção: \n");
         System.out.println("1-Pessoas\n");
         System.out.println("2-Espetáculos\n");
@@ -21,32 +19,114 @@ public class TelaMantenedor extends Tela {
         System.out.println("6-Relatórios\n");
         System.out.println("7-Sair\n");
         Scanner leia = new Scanner(System.in);
-        int opcao = leia.nextInt();
-        while(opcao!=7)
-        {
-        switch (opcao)
-        {
-            case 1:
-                this.ConstruirTelaPessoa();
-                break;
+        System.out.println("Informe a opção selecionada: ");
+        boolean valido = false;
+        int opcao = 0;
+        while (!valido) {
+
+            try {
+                opcao = Integer.parseInt(leia.nextLine());
+                valido = true;
+            } catch (NumberFormatException e) {
+                {
+                    System.out.println("Valor inválido! Digite Novamente: ");
+                    opcao = Integer.parseInt(leia.nextLine());
+                }
+
+            }
         }
-    
+        while (opcao != 7) {
+            switch (opcao) {
+                case 1:
+                    this.ConstruirTelaPessoa();
+                    break;
+            }
+            System.out.println("Usuario:" + this.getPessoa().getNome() + "\t\t\tMenu\n");
+            System.out.println("Escolha sua opção: \n");
+            System.out.println("1-Pessoas\n");
+            System.out.println("2-Espetáculos\n");
+            System.out.println("3-Salas do Teatro\n");
+            System.out.println("4-Artistas\n");
+            System.out.println("5-Apresentações\n");
+            System.out.println("6-Relatórios\n");
+            System.out.println("7-Sair\n");
+            System.out.println("Informe a opção selecionada: ");
+            valido = false;
+            opcao = 0;
+            while (!valido) {
+
+                try {
+                    opcao = Integer.parseInt(leia.nextLine());
+                    valido = true;
+                } catch (NumberFormatException e) {
+                    {
+                        System.out.println("Valor inválido! Digite Novamente: ");
+                        opcao = Integer.parseInt(leia.nextLine());
+                    }
+
+                }
+            }
+        }
     }
-    }
-    public void ConstruirTelaPessoa(){
+
+    public void ConstruirTelaPessoa() {
         System.out.println("Escolha sua opção: \n");
         System.out.println("1-Incluir\n");
         System.out.println("2-Alterar\n");
         System.out.println("3-Excluir\n");
-        
+        System.out.println("4-Sair\n");
+        Scanner leia = new Scanner(System.in);
+        System.out.println("Informe a opção selecionada: ");
+        boolean valido = false;
+        int opcao = 0;
+        while (!valido) {
+
+            try {
+                opcao = Integer.parseInt(leia.nextLine());
+                valido = true;
+            } catch (NumberFormatException e) {
+                {
+                    System.out.println("Valor inválido! Digite Novamente: ");
+                    opcao = Integer.parseInt(leia.nextLine());
+                }
+
+            }
+        }
+        Dao pessoa = new PessoaDao();
+        while (opcao != 4) {
+            switch (opcao) {
+                case 1:
+                    pessoa.Incluir();
+                    break;
+                case 2:
+                    pessoa.Alterar();
+            }
+            System.out.println("Escolha sua opção: \n");
+            System.out.println("1-Incluir\n");
+            System.out.println("2-Alterar\n");
+            System.out.println("3-Excluir\n");
+            System.out.println("4-Sair\n");
+            valido = false;
+            opcao = 0;
+            while (!valido) {
+
+                try {
+                    opcao = Integer.parseInt(leia.nextLine());
+                    valido = true;
+                } catch (NumberFormatException e) {
+                    {
+                        System.out.println("Valor inválido! Digite Novamente: ");
+                        opcao = Integer.parseInt(leia.nextLine());
+                    }
+
+                }
+            }
+
+        }
     }
 
     public Pessoa getPessoa() {
         return pessoa;
     }
-    
-            
-            
-    
-    
+
 }
