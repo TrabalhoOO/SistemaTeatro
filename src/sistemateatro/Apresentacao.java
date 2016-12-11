@@ -1,13 +1,14 @@
 package sistemateatro;
 import java.io.*;
 import java.util.Date;
+import java.util.LinkedList;
 public class Apresentacao {
-	private int _idApresentacao;
-	private Date _data;
-	private Date _horario;
-	private double _valorIngresso;
-	private static int _genID = 0;
-	public Espetaculo _fk_Espetaculo;
-	public Sala _fk_Sala;
-	public Compra _compra;
+	private int idApresentacao;
+	private Date data;
+	private Date horario;
+	private double valorIngresso;
+	private static int genID = 0;
+	public Espetaculo fk_Espetaculo;
+	public Sala fk_Sala;
+	public LinkedList<Compra> compras = new LinkedList<Compra>();
 }

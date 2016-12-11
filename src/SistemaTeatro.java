@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import sistemateatro.Espectador;
+import sistemateatro.Pessoa;
 
 public class SistemaTeatro {
 
@@ -52,9 +53,10 @@ public class SistemaTeatro {
             String data = "07/04/1997";
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             Date dt = df.parse(data);
-            Espectador espectador = new Espectador("Roberto Fernandes", "Rua Teste", "24992064485", "teste@teste.com.br", "Teste", "Teste",dt , "16148567709", "123", "123","123");
-            Espectador.ler(9);
-			Espectador.RelEspectadores();			
+            Pessoa pessoa = new Pessoa("Roberto Fernandes", "Rua Teste", "24992064485", "teste@teste.com.br", "Teste", "Teste",dt , "16148567709", "123", "123","123",1);
+            System.out.println(pessoa.getArq().getAbsolutePath());
+            Pessoa.RelPessoas();
+					
 
         } catch (ParseException e) {
             System.out.println("Data Inválida! Digite a novamente: ");
