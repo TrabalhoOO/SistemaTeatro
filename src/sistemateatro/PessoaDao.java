@@ -1,9 +1,12 @@
 package sistemateatro;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -62,9 +65,9 @@ public class PessoaDao implements Dao {
         System.out.println("\nSenha: ");
         String senha = leia.nextLine();
         GeradorID gerador = new GeradorID();
-        int id =gerador.genID(pessoa);
-        if  (id> 0) {
-            pessoa.setIdPessoa(id);
+
+        if (gerador.genID(pessoa) > 0) {
+            pessoa.setIdPessoa(gerador.genID(pessoa));
         } else {
             System.out.println("Erro na inserção");
         }
@@ -152,28 +155,7 @@ public class PessoaDao implements Dao {
 
     @Override
     public void Alterar() {
-        System.out.println("Informe o Código da Pessoa\n");
-        Scanner leia = new Scanner(System.in);
-        int codigo = 0;
-        try {
-            codigo = Integer.parseInt(leia.nextLine());
-        } catch (InputMismatchException e) {
-            boolean valido = false;
-            while (!valido) {
-                System.out.println("Valor Inválido");
-                codigo = Integer.parseInt(leia.nextLine());
-            }
-        }
-        Pessoa pessoa = Pessoa.buscaID(codigo);
-        Pessoa newpessoa = new Pessoa();
-        System.out.println("Qual campo deseja alterar?\n");
-        this.FinalizaAlteracao(pessoa, newpessoa);
-
-    }
-
-    @Override
-    public void Excluir() {
-        System.out.println("Informe o Código do Espectador que deseja excluir\n");
+        System.out.println("Informe o Código do Espectador\n");
         Scanner leia = new Scanner(System.in);
         int codigo = 0;
         try {
@@ -185,8 +167,10 @@ public class PessoaDao implements Dao {
                 codigo = leia.nextInt();
             }
         }
-        //if(buscarDependencia(int id))
         Pessoa pessoa = Pessoa.buscaID(codigo);
+        Pessoa newpessoa = new Pessoa();
+        System.out.println("Qual campo deseja alterar?\n");
+        this.FinalizaAlteracao(pessoa, newpessoa);
 
     }
 
@@ -261,6 +245,12 @@ public class PessoaDao implements Dao {
         }
     }
 
+    private static String removeUTF8BOM(String s) {
+        if (s.startsWith(UTF8_BOM)) {
+            s = s.substring(1);
+        }
+        return s;
+    }
 
     private void FinalizaAlteracao(Pessoa pessoa, Pessoa newpessoa) {
         newpessoa.setIdPessoa(pessoa.getIdPessoa());
@@ -438,6 +428,7 @@ public class PessoaDao implements Dao {
                     linha = linha.replace(linhaAlterar, linhaAlterada);
                 }
 
+                
                 bufferedWriter.write(linha);
                 bufferedWriter.newLine();
 
@@ -447,7 +438,7 @@ public class PessoaDao implements Dao {
                 bufferedWriter.close();
 
             }
-            fw = new FileWriter(file, false);
+            fw = new FileWriter(file,false);
             s = new Scanner(nf);
             bufferedWriter = new BufferedWriter(fw);
             while (s.hasNextLine()) {
@@ -466,57 +457,6 @@ public class PessoaDao implements Dao {
             try {
                 fw.close();
                 bufferedWriter.close();
-                
-
-            } catch (IOException e) {
-                System.out.println("Não foi possível alterar o arquivo");
-            }
-        }
-        
-    }
-
-    public void Copia(Pessoa pessoa) {
-        String linhaExcluir = Pessoa.TransformarEmLinha(pessoa);
-        File file = pessoa.getArq();
-        File nf = new File("Dados", "temporario.tmp");
-        FileWriter fw = null;
-        Scanner s = null;
-        BufferedWriter bufferedWriter = null;
-        try {
-            fw = new FileWriter(nf,false);
-            s = new Scanner(file);
-            bufferedWriter = new BufferedWriter(fw);
-            while (s.hasNextLine()) {
-                String linha = s.nextLine();
-                if (!(linha.equals(linhaExcluir))) {
-                    bufferedWriter.write(linha);
-                    bufferedWriter.newLine();
-                    fw.flush();
-                    bufferedWriter.flush();
-                    fw.close();
-                    bufferedWriter.close();
-                }
-
-            }
-            fw = new FileWriter(file, false);
-            s = new Scanner(nf);
-            bufferedWriter = new BufferedWriter(fw);
-            while (s.hasNextLine()) {
-                String linha = s.nextLine();
-                bufferedWriter.write(linha);
-                bufferedWriter.newLine();
-
-                fw.flush();
-                bufferedWriter.flush();
-                System.out.println("Exclusão realizada com sucesso");
-
-            }
-        } catch (IOException e) {
-            System.out.println("Não foi possível escrever no arquivo");
-        } finally {
-            try {
-                fw.close();
-                bufferedWriter.close();
 
             } catch (IOException e) {
                 System.out.println("Não foi possível alterar o arquivo");
@@ -524,4 +464,5 @@ public class PessoaDao implements Dao {
         }
 
     }
+
 }
