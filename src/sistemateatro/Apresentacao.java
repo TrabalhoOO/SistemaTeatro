@@ -14,8 +14,6 @@ public class Apresentacao implements Contavel {
     private Sala fk_Sala;
     public LinkedList<Compra> compras = new LinkedList<Compra>();
     private static final File arq = new File("Dados", "Apresentacao.txt");
-    private static final File arqEspetaculo = new File("Dados", "Espetaculo.txt");
-    private static final File arqSala = new File("Dados", "Sala.txt");
     public static final String UTF8_BOM = "\uFEFF";
 
     @Override
@@ -99,6 +97,58 @@ public class Apresentacao implements Contavel {
 
     }
 
+    public static Apresentacao buscaSala(int codigoSala) {
+        Reader fileReader = null;
+        boolean existe = arq.exists();
+        Apresentacao apresentacao = null;
+        try {
+            if (existe) {
+                fileReader = new FileReader(arq.getAbsolutePath());
+                BufferedReader br = new BufferedReader(fileReader);
+                String linha = br.readLine();
+                while (linha != null) {
+                    linha = Apresentacao.removeUTF8BOM(linha);
+                    if (!(linha.equals(""))) {
+
+                        String[] dados = linha.split(";");
+                        int idSala = Integer.parseInt(dados[1]);
+
+                        if (idSala == codigoSala) {
+                            apresentacao = new Apresentacao();
+                            apresentacao.setIdApresentacao(Integer.parseInt(dados[0]));
+                            Sala sala = Sala.buscaID(Integer.parseInt(dados[1]));
+                            if (sala != null) {
+                                apresentacao.setFk_Sala(sala);
+                            }
+                            Espetaculo espetaculo = Espetaculo.buscaID(Integer.parseInt(dados[2]));
+                            if (espetaculo != null) {
+                                apresentacao.setFk_Espetaculo(espetaculo);
+                            }
+                            apresentacao.setData(Long.parseLong(dados[3]));
+                            apresentacao.setHorario(Long.parseLong(dados[4]));
+                            apresentacao.setValorIngresso(Double.parseDouble(dados[5]));
+
+                            return apresentacao;
+                        }
+                    }
+                    linha = br.readLine();
+                }
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Não foi possível alterar o arquivo");
+        } finally {
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                System.out.println("Não foi possível alterar o arquivo");
+            }
+
+        }
+        return null;
+    }
+
     public static Apresentacao buscaID(int codigo) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -112,15 +162,17 @@ public class Apresentacao implements Contavel {
                     linha = Apresentacao.removeUTF8BOM(linha);
                     if (!(linha.equals(""))) {
                         String[] dados = linha.split(";");
+
                         int id = Integer.parseInt(dados[0]);
 
                         if (id == codigo) {
+                            apresentacao = new Apresentacao();
                             apresentacao.setIdApresentacao(id);
-                            Sala sala = Sala.buscaID(dados[1]);
+                            Sala sala = Sala.buscaID(Integer.parseInt(dados[1]));
                             if (sala != null) {
                                 apresentacao.setFk_Sala(sala);
                             }
-                            Espetaculo espetaculo = Espetaculo.buscaID(dados[2]);
+                            Espetaculo espetaculo = Espetaculo.buscaID(Integer.parseInt(dados[2]));
                             if (espetaculo != null) {
                                 apresentacao.setFk_Espetaculo(espetaculo);
                             }
@@ -133,6 +185,108 @@ public class Apresentacao implements Contavel {
                     }
                     linha = br.readLine();
                 }
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Não foi possível alterar o arquivo");
+        } finally {
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                System.out.println("Não foi possível alterar o arquivo");
+            }
+
+        }
+        return null;
+    }
+
+    public static LinkedList<Apresentacao> buscaporData(Long dt) {
+        Reader fileReader = null;
+        boolean existe = arq.exists();
+        Apresentacao apresentacao = null;
+        LinkedList lista = new LinkedList();
+        try {
+            if (existe) {
+                fileReader = new FileReader(arq.getAbsolutePath());
+                BufferedReader br = new BufferedReader(fileReader);
+                String linha = br.readLine();
+                while (linha != null) {
+                    linha = Apresentacao.removeUTF8BOM(linha);
+                    if (!(linha.equals(""))) {
+
+                        String[] dados = linha.split(";");
+
+                        if (dt == Long.parseLong(dados[3])) {
+                            apresentacao = new Apresentacao();
+                            apresentacao.setIdApresentacao(Integer.parseInt(dados[0]));
+                            Sala sala = Sala.buscaID(Integer.parseInt(dados[1]));
+                            if (sala != null) {
+                                apresentacao.setFk_Sala(sala);
+                            }
+                            Espetaculo espetaculo = Espetaculo.buscaID(Integer.parseInt(dados[2]));
+                            if (espetaculo != null) {
+                                apresentacao.setFk_Espetaculo(espetaculo);
+                            }
+                            apresentacao.setData(Long.parseLong(dados[3]));
+                            apresentacao.setHorario(Long.parseLong(dados[4]));
+                            apresentacao.setValorIngresso(Double.parseDouble(dados[5]));
+                            lista.add(apresentacao);
+                        }
+                    }
+                    linha = br.readLine();
+                }
+                return lista;
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Não foi possível alterar o arquivo");
+        } finally {
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                System.out.println("Não foi possível alterar o arquivo");
+            }
+
+        }
+        return null;
+    }
+
+    public static LinkedList<Apresentacao> buscaTodos() {
+        Reader fileReader = null;
+        boolean existe = arq.exists();
+        Apresentacao apresentacao = null;
+        LinkedList lista = new LinkedList();
+        try {
+            if (existe) {
+                fileReader = new FileReader(arq.getAbsolutePath());
+                BufferedReader br = new BufferedReader(fileReader);
+                String linha = br.readLine();
+                while (linha != null) {
+                    linha = Apresentacao.removeUTF8BOM(linha);
+                    if (!(linha.equals(""))) {
+
+                        String[] dados = linha.split(";");
+
+                        apresentacao = new Apresentacao();
+                        apresentacao.setIdApresentacao(Integer.parseInt(dados[0]));
+                        Sala sala = Sala.buscaID(Integer.parseInt(dados[1]));
+                        if (sala != null) {
+                            apresentacao.setFk_Sala(sala);
+                        }
+                        Espetaculo espetaculo = Espetaculo.buscaID(Integer.parseInt(dados[2]));
+                        if (espetaculo != null) {
+                            apresentacao.setFk_Espetaculo(espetaculo);
+                        }
+                        apresentacao.setData(Long.parseLong(dados[3]));
+                        apresentacao.setHorario(Long.parseLong(dados[4]));
+                        apresentacao.setValorIngresso(Double.parseDouble(dados[5]));
+                        lista.add(apresentacao);
+                    }
+                    linha = br.readLine();
+                }
+                return lista;
 
             }
 
