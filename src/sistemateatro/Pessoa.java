@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 
-
-
 public class Pessoa implements Comparable<Pessoa>, Contavel {
 
     private int idPessoa;
@@ -30,7 +28,6 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
     public Pessoa() {
     }
 
-   
     public LinkedList<Preferencia> getPreferencia() {
         return preferencia;
     }
@@ -161,13 +158,10 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         return arq;
     }
 
-   public void buscaID(int id) {
-    }
-
-    public static boolean buscaLogin(String login) {
+    public static Pessoa buscaID(int codigo) {
         Reader fileReader = null;
         boolean existe = arq.exists();
-        System.out.println(existe);
+        Pessoa pessoa = null;
         try {
             if (existe) {
                 fileReader = new FileReader(arq.getAbsolutePath());
@@ -176,7 +170,57 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
                 while (linha != null) {
                     linha = Pessoa.removeUTF8BOM(linha);
                     if (!(linha.equals(""))) {
-                        String[] dados = linha.split(";|\\s");
+                        String[] dados = linha.split(";");
+                        int id = Integer.parseInt(dados[0]);
+
+                        if (id == codigo) {
+                            pessoa = new Pessoa();
+                            pessoa.setIdPessoa(id);
+                            pessoa.setNome(dados[1]);
+                            pessoa.setEndereco(dados[2]);
+                            pessoa.setTelefone(dados[3]);
+                            pessoa.setEmail(dados[4]);
+                            pessoa.setLocalTrabalho(dados[5]);
+                            pessoa.setEnderecoComercial(dados[6]);
+                            pessoa.setDataNasc(Long.parseLong(dados[7]));
+                            pessoa.setCPF(dados[8]);
+                            pessoa.setRG(dados[9]);
+                            pessoa.setLogin(dados[10]);
+                            pessoa.setSenha(dados[11]);
+                            pessoa.setNivelAcesso(Integer.parseInt(dados[12]));
+                            return pessoa;
+                        }
+                    }
+                    linha = br.readLine();
+                }
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Não foi possível alterar o arquivo");
+        } finally {
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                System.out.println("Não foi possível alterar o arquivo");
+            }
+
+        }
+        return null;
+    }
+
+    public static boolean buscaLogin(String login) {
+        Reader fileReader = null;
+        boolean existe = arq.exists();
+        try {
+            if (existe) {
+                fileReader = new FileReader(arq.getAbsolutePath());
+                BufferedReader br = new BufferedReader(fileReader);
+                String linha = br.readLine();
+                while (linha != null) {
+                    linha = Pessoa.removeUTF8BOM(linha);
+                    if (!(linha.equals(""))) {
+                        String[] dados = linha.split(";");
                         if (login.equals(dados[10])) {
                             System.out.println("Login já existente. Digite novamente: ");
                             return true;
@@ -190,21 +234,22 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         } catch (IOException e) {
             System.out.println("Não foi possível alterar o arquivo");
         } finally {
-            if(fileReader!=null){
-            try {
-                fileReader.close();
-            } catch (IOException e) {
-                System.out.println("Não foi possível fechar o arquivo");
+            if (fileReader != null) {
+                try {
+                    fileReader.close();
+                } catch (IOException e) {
+                    System.out.println("Não foi possível fechar o arquivo");
+                }
+            } else {
+                return false;
             }
-            }
-            else{return false;}
-     
+
         }
-        
+
         return false;
     }
 
-    public Pessoa Login(String login, String senha) {
+    public static Pessoa Login(String login, String senha) {
         Reader fileReader = null;
         boolean existe = arq.exists();
         try {
@@ -216,7 +261,8 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
                 while (linha != null) {
                     linha = Pessoa.removeUTF8BOM(linha);
                     if (!(linha.equals(""))) {
-                        String[] dados = linha.split(";|\\s");
+                        String[] dados = linha.split(";");
+                        System.out.println(dados[10]);
                         if (login.equals(dados[10])) {
                             if (senha.equals(dados[11])) {
                                 pessoa = new Pessoa();
@@ -233,6 +279,7 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
                                 pessoa.setLogin(dados[10]);
                                 pessoa.setSenha(dados[11]);
                                 pessoa.setNivelAcesso(Integer.parseInt(dados[12]));
+                                return pessoa;
                             } else {
                                 System.out.println("Senha Incorreta");
                                 return null;
@@ -272,7 +319,7 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
                 while (linha != null) {
                     linha = Pessoa.removeUTF8BOM(linha);
                     if (!(linha.equals(""))) {
-                        
+
                         String[] dados = linha.split(";");
                         pessoa = new Pessoa();
                         pessoa.setIdPessoa(Integer.parseInt(dados[0]));
@@ -315,7 +362,8 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         }
 
     }
-public void imprimeDados() {
+
+    public void imprimeDados() {
         System.out.println("\nId:" + this.getIdPessoa());
         System.out.println("Nome:" + this.getNome());
         System.out.println("Endereço: " + this.getEndereco());
@@ -333,10 +381,44 @@ public void imprimeDados() {
             System.out.println("Nível de Acesso: ESPECTADOR");
         }
     }
-private static String removeUTF8BOM(String s) {
+
+    private static String removeUTF8BOM(String s) {
         if (s.startsWith(UTF8_BOM)) {
             s = s.substring(1);
         }
         return s;
+    }
+    
+    public static String TransformarEmLinha(Pessoa pessoa)
+    {
+        String linha = Integer.toString(pessoa.getIdPessoa())
+            +";"
+            +pessoa.getNome()
+            +";"
+            +pessoa.getEndereco()
+            +";"
+            +pessoa.getTelefone()
+            +";"
+            +pessoa.getEmail()
+            +";"
+            +pessoa.getLocalTrabalho()
+            +";"
+            +pessoa.getEnderecoComercial()
+            +";"
+            +pessoa.getDataNasc().toString()
+            +";"
+            +pessoa.getCPF()
+            +";"
+            +pessoa.getRG()
+            +";"
+            +pessoa.getLogin()
+            +";"
+            +pessoa.getSenha()
+            +";"
+            +Integer.toString(pessoa.getNivelAcesso())
+            +";";
+        return linha;
+    
+    
     }
 }
