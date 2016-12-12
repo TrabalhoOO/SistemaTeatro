@@ -78,26 +78,7 @@ public class TelaEspectador {
     }
 
     private void ConstruirTelaCompra() {
-        System.out.println("Escolha sua opção: \n");
-        System.out.println("1-Realizar Compra\n");
-        System.out.println("2-Visualizar Compras\n");
-        Scanner leia = new Scanner(System.in);
-        System.out.println("Informe a opção selecionada: ");
-        boolean valido = false;
-        int opcao = 0;
-        while (!valido) {
-
-            try {
-                opcao = Integer.parseInt(leia.nextLine());
-                valido = true;
-            } catch (NumberFormatException e) {
-                {
-                    System.out.println("Valor inválido! Digite Novamente: ");
-                    opcao = Integer.parseInt(leia.nextLine());
-                }
-
-            }
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
