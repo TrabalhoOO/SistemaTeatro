@@ -42,8 +42,10 @@ public class TelaMantenedor {
                 case 1:
                     this.ConstruirTelaPessoa();
                     break;
+                    
                 case 5:
                     this.ConstruirTelaApresentacao();
+                    break;
                 default:
                     break;
             }
@@ -106,6 +108,12 @@ public class TelaMantenedor {
                     break;
                 case 2:
                     pessoa.Alterar();
+                    break;
+                case 3:
+                    pessoa.Excluir();
+                    break;
+                default:
+                    break;
             }
             System.out.println("Escolha sua opção: \n");
             System.out.println("1-Incluir\n");
@@ -162,8 +170,12 @@ public class TelaMantenedor {
                     break;
                 case 2:
                     apresentacao.Alterar();
+                    break;
                 case 3:
                     apresentacao.Excluir();
+                    break;
+                default:
+                    break;
             }
             System.out.println("Escolha sua opção: \n");
             System.out.println("1-Incluir\n");
