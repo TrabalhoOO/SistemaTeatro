@@ -70,7 +70,7 @@ public class EspetaculoDao implements Dao{
             df.setLenient(false);
             if (dt.compareTo(dt1)<0 && dt.compareTo(dt1)!=0){
                 try {
-                    dt = df.parse(data1);
+                    dt1 = df.parse(data1);
                     valido = true;
                 } catch (ParseException ex) {
                     System.out.println("Data Inválida! Digite Novamente: ");
