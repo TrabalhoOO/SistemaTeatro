@@ -58,12 +58,22 @@ public class CompraDao {
     }
 
     private void finalizarCompra() {
+        Scanner leia = new Scanner(System.in);
         LinkedList<FormaPagamento> lista = FormaPagamento.buscaTodos();
         System.out.println("Escolha a Forma de Pagamento e informe o código Escolhido: \n");
         if (lista != null) {
             for (FormaPagamento forma : lista) {
                   System.out.println(forma.getIdForma() + "-" + forma.getDescricao());
             }
+            String opcao;
+            opcao = leia.nextLine();
+            for (FormaPagamento forma : lista) {
+                int id = Integer.parseInt(opcao);
+                if (forma.getIdForma() == id) {
+                    this.compra.setFk_FormaPagamento(forma);
+                }
+            }
+            
         }
 }
 }
