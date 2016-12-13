@@ -6,9 +6,9 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class CompraDao {
-    
+
     private Compra compra = new Compra();
-    
+
     public void Incluir() {
         Scanner leia = new Scanner(System.in);
         System.out.println("Escolha o Espetáculo e informe o código Escolhido: \n");
@@ -35,45 +35,46 @@ public class CompraDao {
                     compra.setValorTotal(quantidade * a.getValorIngresso());
                     System.out.println("Valor Total a ser Pago: " + compra.getValorTotal());
                     for (int i = 0; i < quantidade; i++) {
-                        Sala.ExibirVagas();
+                        compra.getFk_Apresentacao().getFk_Sala().ExibirVagas();
                         System.out.println("Informe o número do " + i + "º assento");
                         String numAssento = leia.nextLine();
                         int Assento = Integer.parseInt(numAssento);
-                        if (Sala.HaVaga(Assento)) {
+                        if (compra.getFk_Apresentacao().getFk_Sala().HaVaga(Assento)) {
                             compra.setAssentos(Assento);
-                            
+
                         }
-                        
+
                     }
                     this.finalizarCompra();
                     break;
                 }
             }
-            
+
         } else {
             System.out.println("Nâo há Espetáculos Disponíveis");
-            
+
         }
-        
+
     }
 
     private void finalizarCompra() {
         Scanner leia = new Scanner(System.in);
-        LinkedList<FormaPagamento> lista = FormaPagamento.buscaTodos();
         System.out.println("Escolha a Forma de Pagamento e informe o código Escolhido: \n");
-        if (lista != null) {
-            for (FormaPagamento forma : lista) {
-                  System.out.println(forma.getIdForma() + "-" + forma.getDescricao());
-            }
-            String opcao;
-            opcao = leia.nextLine();
-            for (FormaPagamento forma : lista) {
-                int id = Integer.parseInt(opcao);
-                if (forma.getIdForma() == id) {
-                    this.compra.setFk_FormaPagamento(forma);
-                }
-            }
+            System.out.println("1 - Cartão de Débito \n"
+                                + "2 - Cartão de Crédito\n"
+                                + "3 - Ficha Compensatória\n"
+                                );
+
+            int opcao;
+            opcao = Integer.parseInt(leia.nextLine());
+            switch(opcao)
+            {
+                case 1:
+                    
             
+            }
+                
+
         }
-}
+    }
 }
