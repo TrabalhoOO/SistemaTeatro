@@ -18,6 +18,7 @@ public class Espectador implements Comparable<Espectador> {
     private String rg;
     private String login;
     private String senha;
+    //Lembrar de alterar o path
     private static final File dir = new File("C:\\Users\\Ricardo Alves\\Desktop\\Desenvolvimento\\Projetos\\Backup\\SistemaTeatro");
     private static final File arq = new File(dir, "Espectador.txt");
 	public static final String UTF8_BOM = "\uFEFF";
