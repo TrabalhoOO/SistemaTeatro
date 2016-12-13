@@ -27,15 +27,15 @@ public class EspetaculoDao implements Dao{
         System.out.println("Informe a descrição do espetaculo: ");
         String descricao = leia.nextLine();
         System.out.println("Informe a faixa etária: ");
-        int faixaEtaria = leia.nextLine();
+        int faixaEtaria = Integer.parseInt(leia.nextLine());
         System.out.println("Informe a duração do espetaculo em minutos: ");
-        int duracaoMinutos = leia.nextLine();
+        int duracaoMinutos = Integer.parseInt(leia.nextLine());
         System.out.println("informe a quantidade de artistas: ");
-        int artistas = leia.nextLine();
+        int artistas = Integer.parseInt(leia.nextLine());
         for (int i = 0; i < artistas; i++) {
             System.out.println("Informe o codigo do " + i + "º artista: ");
-            int codArtista = leia.nextLine();
-            Artista artista = buscaID(Integer.parseInt(codArtista));
+            int codArtista = Integer.parseInt(leia.nextLine());
+            Artista artista = buscaID(codArtista);
             if (artista != null) {
                 espetaculo.setArtista(artista);
             } else {
@@ -43,10 +43,10 @@ public class EspetaculoDao implements Dao{
                 i--;
             }
         }
-    }
+    
     System.out.println ("Informe a data de início: ");
     String data = leia.nextLine();
-        valido = false;
+        boolean valido = false;
         Date dt = null;
         while (!valido) {
 
@@ -81,7 +81,7 @@ public class EspetaculoDao implements Dao{
                 data1 = leia.nextLine();
             }
         }
-
+    }
     @Override
     public void Alterar() {
 
@@ -90,5 +90,4 @@ public class EspetaculoDao implements Dao{
     public void Excluir() {
 
     }
-
-};
+}
