@@ -4,11 +4,7 @@ import java.io.*;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class Artista implements Contavel{
-
-    
-
-    
+public class Artista implements Contavel {
 
     private int idArtista;
     private String nome;
@@ -17,7 +13,6 @@ public class Artista implements Contavel{
     private String RG;
     private String celular;
     private String email;
-    public LinkedList<Espetaculo> fk_Espetaculo = new LinkedList<Espetaculo>();
     private static final File arq = new File("Dados", "Artista.txt");
     public static final String UTF8_BOM = "\uFEFF";
 
@@ -124,7 +119,7 @@ public class Artista implements Contavel{
         }
         return null;
     }
-    
+
     public static String TransformarEmLinha(Artista artista) {
         String linha = Integer.toString(artista.getIDArtista())
                 + ";"
@@ -143,7 +138,8 @@ public class Artista implements Contavel{
         return linha;
 
     }
-   private static String removeUTF8BOM(String s) {
+
+    private static String removeUTF8BOM(String s) {
         if (s.startsWith(UTF8_BOM)) {
             s = s.substring(1);
         }
