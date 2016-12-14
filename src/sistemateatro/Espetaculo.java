@@ -240,4 +240,18 @@ public class Espetaculo implements Contavel {
         
         return linha;
     }
+
+    public void imprimeDados() {
+        System.out.println("\nId:" + this.getIdEspetaculo());
+        System.out.println("Nome do Espetáculo: " + this.getNome());
+        System.out.println("Data de início: " + this.getDataInicio());
+        System.out.println("Data de fim: " + this.getDataFim());
+        System.out.println("Descrição: " + this.getDescricao());
+        System.out.println("Faixa etária: " + this.getFaixaEtaria());
+        System.out.println("Duração em minutos: " + this.getDuracaoMinutos());
+        System.out.println("Tipo de espetaculo: " + this.getFk_TipoDeEspetaculo());
+        for(Artista a: this.fk_Artista){
+            System.out.println("Artista: " + a.getNome());
+        }
+    }
 }
