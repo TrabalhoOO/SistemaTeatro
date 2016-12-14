@@ -9,57 +9,6 @@ import java.util.Scanner;
 
 public class TipoEspetaculoDao implements Dao {
 
-    private static void escrever(TipoEspetaculo tipoEspetaculo) {
-        File arq = tipoEspetaculo.getArq();
-        FileWriter fileWriter = null;
-        BufferedWriter bufferedWriter = null;
-        try {
-            if (!arq.exists()) {
-                arq.createNewFile();
-            }
-            //Devemos passar no construtor do FileWriter qual arquivo
-            // vamos manipular.
-            // Esse construtor aceita dois tipos de parâmetros,
-            // File ou String.
-            //O parâmetro true indica que reescrevemos no arquivo
-            // sem apagar o que já existe.
-            // O false apagaria o conteúdo do arquivo e escreveria
-            // o novo conteúdo.
-            // Se não usar o 2° parâmetro, ele por padrão será false.
-            //O mais importante, essa linha abre o fluxo do arquivo
-            //FileWriter fileWriter = new FileWriter(arq, true);
-
-            //Agora vamos usar a classe PrintWriter para escrever
-            //fisicamente no arquivo.
-            //Precisamos passar o objeto FileReader em seu construtor
-            fileWriter = new FileWriter(arq.getAbsolutePath(), true);
-            bufferedWriter = new BufferedWriter(fileWriter);
-
-            bufferedWriter.write(Integer.toString(tipoEspetaculo.getIdTipoEspetaculo()));
-            bufferedWriter.write(";");
-            bufferedWriter.write(tipoEspetaculo.getNome());
-            bufferedWriter.write(";");
-            bufferedWriter.write(tipoEspetaculo.getDescricao());
-            bufferedWriter.write(";");
-            bufferedWriter.newLine();
-
-            //o método flush libera a escrita no arquivo
-            fileWriter.flush();
-            bufferedWriter.flush();
-
-        } catch (IOException e) {
-            System.out.println("Não foi possível escrever no arquivo");
-        } finally {
-            try {
-                fileWriter.close();
-                bufferedWriter.close();
-                System.out.println("Cadastro realizado com sucesso");
-            } catch (IOException e) {
-                System.out.println("Não foi possível alterar o arquivo");
-            }
-        }
-    }
-
     TipoEspetaculo tipoEspetaculo = new TipoEspetaculo();
     public static final String UTF8_BOM = "\uFEFF";
 
@@ -259,5 +208,55 @@ public class TipoEspetaculoDao implements Dao {
             }
         }
 
+    }
+     private static void escrever(TipoEspetaculo tipoEspetaculo) {
+        File arq = tipoEspetaculo.getArq();
+        FileWriter fileWriter = null;
+        BufferedWriter bufferedWriter = null;
+        try {
+            if (!arq.exists()) {
+                arq.createNewFile();
+            }
+            //Devemos passar no construtor do FileWriter qual arquivo
+            // vamos manipular.
+            // Esse construtor aceita dois tipos de parâmetros,
+            // File ou String.
+            //O parâmetro true indica que reescrevemos no arquivo
+            // sem apagar o que já existe.
+            // O false apagaria o conteúdo do arquivo e escreveria
+            // o novo conteúdo.
+            // Se não usar o 2° parâmetro, ele por padrão será false.
+            //O mais importante, essa linha abre o fluxo do arquivo
+            //FileWriter fileWriter = new FileWriter(arq, true);
+
+            //Agora vamos usar a classe PrintWriter para escrever
+            //fisicamente no arquivo.
+            //Precisamos passar o objeto FileReader em seu construtor
+            fileWriter = new FileWriter(arq.getAbsolutePath(), true);
+            bufferedWriter = new BufferedWriter(fileWriter);
+
+            bufferedWriter.write(Integer.toString(tipoEspetaculo.getIdTipoEspetaculo()));
+            bufferedWriter.write(";");
+            bufferedWriter.write(tipoEspetaculo.getNome());
+            bufferedWriter.write(";");
+            bufferedWriter.write(tipoEspetaculo.getDescricao());
+            bufferedWriter.write(";");
+            bufferedWriter.newLine();
+
+            //o método flush libera a escrita no arquivo
+            fileWriter.flush();
+            bufferedWriter.flush();
+
+        } catch (IOException e) {
+            System.out.println("Não foi possível escrever no arquivo");
+        } finally {
+            try {
+                fileWriter.close();
+                bufferedWriter.close();
+                System.out.println("Cadastro realizado com sucesso");
+            } catch (IOException e) {
+                System.out.println("Não foi possível alterar o arquivo");
+            }
+        }
     }
 }
