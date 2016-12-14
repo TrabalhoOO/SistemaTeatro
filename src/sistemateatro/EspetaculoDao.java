@@ -125,7 +125,7 @@ public class EspetaculoDao implements Dao {
                 bufferedWriter.write(";");
                 bufferedWriter.write(Integer.toString(espetaculo.getDuracaoMinutos()));
                 bufferedWriter.write(";");
-                bufferedWriter.write(Integer.toString(espetaculo.getFk_TipoDeEspetaculo().getIDespetaculo()));
+                bufferedWriter.write(Integer.toString(espetaculo.getFk_TipoDeEspetaculo().getIdTipoEspetaculo()));
                 bufferedWriter.write(";");
                 bufferedWriter.write(Integer.toString(espetaculo.getFk_Artista().get(i).getIDArtista()));
             }
