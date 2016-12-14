@@ -7,17 +7,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/**
- *
- * @author jpdia
- */
 public class CompraDao {
 
     private Compra compra = new Compra();
 
-    /**
-     *
-     */
     public void Incluir() {
         Scanner leia = new Scanner(System.in);
         System.out.println("Escolha o Espetáculo e informe o código Escolhido: \n");
@@ -188,19 +181,11 @@ public class CompraDao {
         }
     }
 
-    /**
-     *
-     * @return
-     */
     public Date getDataAtual() {
         Date date = new Date();
         return date;
     }
 
-    /**
-     *
-     * @param idPessoa
-     */
     public void VisulizarCompra(int idPessoa) {
         LinkedList<Compra> compras = Compra.ComprasporPessoa(idPessoa);
         for (Compra compra : compras) {
