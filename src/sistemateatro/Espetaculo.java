@@ -18,7 +18,6 @@ public class Espetaculo implements Contavel {
     private static final File arq = new File("Dados", "Espetaculo.txt");
     private static final String UTF8_BOM = "\uFEFF";
 
-    
     public LinkedList<Artista> getFk_Artista() {
         return fk_Artista;
     }
@@ -121,7 +120,7 @@ public class Espetaculo implements Contavel {
 
                         int id = Integer.parseInt(dados[0]);
 
-                        if (id == codigo) {                            
+                        if (id == codigo) {
                             espetaculo.setIdEspetaculo(id);
                             espetaculo.setNome(dados[1]);
                             espetaculo.setDataInicio(Long.parseLong(dados[2]));
@@ -133,10 +132,10 @@ public class Espetaculo implements Contavel {
                                 espetaculo.setFk_TipoDeEspetaculo(tipoespetaculo);
                             }
                             Artista artista = Artista.buscaID(Integer.parseInt(dados[7]));
-                            espetaculo.setFk_Artista(artista);                            
+                            espetaculo.setFk_Artista(artista);
                         }
                     }
-                    
+
                     linha = br.readLine();
                 }
                 return espetaculo;
@@ -153,6 +152,58 @@ public class Espetaculo implements Contavel {
             }
 
         }
+        return null;
+    }
+
+    public static LinkedList<Espetaculo> buscaTodos() {
+        Reader fileReader = null;
+        boolean existe = arq.exists();
+        Espetaculo espetaculo = null;
+        try {
+            if (existe) {
+                fileReader = new FileReader(arq.getAbsolutePath());
+                BufferedReader br = new BufferedReader(fileReader);
+                String linha = br.readLine();
+                espetaculo = new Espetaculo();
+                LinkedList<Espetaculo> lista =  new LinkedList<>();
+                while (linha != null) {
+                    linha = Espetaculo.removeUTF8BOM(linha);
+                    if (!(linha.equals(""))) {
+                        String[] dados = linha.split(";");
+
+                        int id = Integer.parseInt(dados[0]);
+                        espetaculo.setIdEspetaculo(id);
+                        espetaculo.setNome(dados[1]);
+                        espetaculo.setDataInicio(Long.parseLong(dados[2]));
+                        espetaculo.setDataFim(Long.parseLong(dados[3]));
+                        espetaculo.setFaixaEtaria(Integer.parseInt(dados[4]));
+                        espetaculo.setDuracaoMinutos(Integer.parseInt(dados[5]));
+                        TipoEspetaculo tipoespetaculo = TipoEspetaculo.buscaID(Integer.parseInt(dados[6]));
+                        if (tipoespetaculo != null) {
+                            espetaculo.setFk_TipoDeEspetaculo(tipoespetaculo);
+                        }
+                        Artista artista = Artista.buscaID(Integer.parseInt(dados[7]));
+                        espetaculo.setFk_Artista(artista);
+                        lista.add(espetaculo);
+                    }
+                    linha = br.readLine();
+                }
+                
+                
+             return lista;   
+            }
+
+        } catch (IOException e) {
+            System.out.println("Não foi possível alterar o arquivo");
+        } finally {
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                System.out.println("Não foi possível alterar o arquivo");
+            }
+
+        }
+
         return null;
     }
 }

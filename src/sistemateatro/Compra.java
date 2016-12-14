@@ -299,4 +299,80 @@ public class Compra implements Contavel {
         return s;
     }
 
+     public static void TotalporEspetaculo() {
+        Reader fileReader = null;
+        boolean existe = arq.exists();
+        Compra compra = null;
+        LinkedList<Compra> listaCompra = new LinkedList<>();
+        try {
+
+            if (existe) {
+                fileReader = new FileReader(arq.getAbsolutePath());
+                BufferedReader br = new BufferedReader(fileReader);
+                String linha = br.readLine();
+                
+                while (linha != null) {
+                    linha = Compra.removeUTF8BOM(linha);
+                    if (!(linha.equals(""))) {
+                        String[] dados = linha.split(";");
+
+                        
+
+                        
+                            compra = new Compra();
+                            compra.setNumeroReserva(Integer.parseInt(dados[0]));
+                            Apresentacao apresentacao = Apresentacao.buscaID(Integer.parseInt(dados[3]));
+                            compra.setFk_Apresentacao(apresentacao);
+                            compra.setAssentos(Compra.totalAssentosCompradosporCompra(compra.getFk_Apresentacao().getFk_Sala().getIdSala(), compra.getNumeroReserva()));
+                            compra.setValorTotal(Double.parseDouble(dados[2]));
+                            compra.setFk_Pessoa(Pessoa.buscaID(Integer.parseInt(dados[4])));
+                            if (dados[5].equals("Cartão de Crédito")) {
+                                compra.setFormaPagamento(dados[5]);
+                                compra.setNumeroCartao(dados[6]);
+                                compra.setBandeiraCartao(dados[7]);
+                                compra.setDatavalidade(dados[8]);
+                            } else {
+                                compra.setFormaPagamento(dados[5]);
+                                compra.setNumBoleto(dados[6]);
+                                compra.setDataVencimento(Long.parseLong(dados[7]));
+
+                            }
+
+                            listaCompra.add(compra);
+
+                        }
+                        linha = br.readLine();
+                    }
+                }
+
+            
+        } catch (IOException e) {
+            System.out.println("Não foi possível alterar o arquivo");
+        } finally {
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                System.out.println("Não foi possível alterar o arquivo");
+            }
+
+        }
+        if(listaCompra.size()>0)
+        {
+            LinkedList<Espetaculo> lista = Espetaculo.buscaTodos();
+            for(Espetaculo e:lista)
+            {
+                double valorTotal =0;
+                for(Compra c :  listaCompra)
+                {
+                    if(e.getIdEspetaculo()==compra.getFk_Apresentacao().getFk_Espetaculo().getIdEspetaculo())
+                    {
+                        valorTotal+=compra.getValorTotal();
+                    
+                    }
+                
+                }
+                System.out.println("O valor total arrecado pelo Espetáculo: " + e.getNome() + "é: "+valorTotal );
+            }
+        }
+    }
 }

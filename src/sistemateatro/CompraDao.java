@@ -204,14 +204,16 @@ public class CompraDao {
                 System.out.println("Bandeira do Cartão: " + compra.getBandeiraCartao());
                 System.out.println("Data de Validade: " + compra.getDatavalidade());
             } else {
-                compra.setNumeroCartao(dados[6]);
-                compra.setBandeiraCartao(dados[7]);
-                
-            }
+                Date data = new Date();
+                data.setTime(compra.getDataVencimento());
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-            System.out.println("Número da Reserva: " + compra.getNumeroReserva());
+                System.out.println("Número do Boleto: " + compra.getNumBoleto());
+                System.out.println("Data de Vencimento: " + format.format(data));
+            }
 
         }
 
     }
 
+}
