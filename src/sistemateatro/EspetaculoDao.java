@@ -35,9 +35,9 @@ public class EspetaculoDao implements Dao{
         for (int i = 0; i < artistas; i++) {
             System.out.println("Informe o codigo do " + i + "º artista: ");
             int codArtista = Integer.parseInt(leia.nextLine());
-            Artista artista = buscaID(codArtista);
+            Artista artista = Artista.buscaID(codArtista);
             if (artista != null) {
-                espetaculo.setArtista(artista);
+                espetaculo.setFk_Artista(artista);
             } else {
                 System.out.println("Artista não encontrado. Informe novamente!");
                 i--;

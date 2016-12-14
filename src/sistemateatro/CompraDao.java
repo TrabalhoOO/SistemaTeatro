@@ -37,7 +37,7 @@ public class CompraDao {
                     compra.setValorTotal(quantidade * a.getValorIngresso());
 
                     for (int i = 0; i < quantidade; i++) {
-                        compra.getFk_Apresentacao().getFk_Sala().ExibirVagas();
+                        compra.getFk_Apresentacao().getFk_Sala().exibirVagas();
                         System.out.println("Informe o número do " + i + "º assento");
                         String numAssento = leia.nextLine();
                         int Assento = Integer.parseInt(numAssento);
@@ -214,4 +214,4 @@ public class CompraDao {
         }
 
     }
-}
+
