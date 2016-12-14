@@ -26,6 +26,10 @@ public class Espetaculo implements Contavel {
     public void setFk_Artista(Artista artista) {
         this.fk_Artista.add(artista);
     }
+    
+    public void setFk_Artista(LinkedList<Artista> artistas){
+        this.fk_Artista.addAll(artistas);
+    }
 
     public Long getDataInicio() {
         return dataInicio.getTime();
@@ -182,7 +186,7 @@ public class Espetaculo implements Contavel {
                 + espetaculo.getDuracaoMinutos()
                 + ";"
                 + espetaculo.getFk_TipoDeEspetaculo().getIDTipoEspetaculo();
-        //coloca fk_artista?
+        
         return linha;
 
     }

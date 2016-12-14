@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class EspetaculoDao implements Dao{
+public class EspetaculoDao implements Dao {
 
     Espetaculo espetaculo = new Espetaculo();
     public static final String UTF8_BOM = "\uFEFF";
@@ -35,17 +35,17 @@ public class EspetaculoDao implements Dao{
         for (int i = 0; i < artistas; i++) {
             System.out.println("Informe o codigo do " + i + "º artista: ");
             int codArtista = Integer.parseInt(leia.nextLine());
-            Artista artista = buscaID(codArtista);
+            Artista artista = Artista.buscaID(codArtista);
             if (artista != null) {
-                espetaculo.setArtista(artista);
+                espetaculo.setFk_Artista(artista);
             } else {
                 System.out.println("Artista não encontrado. Informe novamente!");
                 i--;
             }
         }
-    
-    System.out.println ("Informe a data de início: ");
-    String data = leia.nextLine();
+
+        System.out.println("Informe a data de início: ");
+        String data = leia.nextLine();
         boolean valido = false;
         Date dt = null;
         while (!valido) {
@@ -60,15 +60,15 @@ public class EspetaculoDao implements Dao{
                 data = leia.nextLine();
             }
         }
-    System.out.println ("Informe a data de término: ");
-    String data1 = leia.nextLine();
+        System.out.println("Informe a data de término: ");
+        String data1 = leia.nextLine();
         valido = false;
         Date dt1 = null;
         while (!valido) {
 
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             df.setLenient(false);
-            if (dt.compareTo(dt1)<0){
+            if (dt.compareTo(dt1) < 0) {
                 try {
                     dt1 = df.parse(data1);
                     valido = true;
@@ -76,13 +76,14 @@ public class EspetaculoDao implements Dao{
                     System.out.println("Data Inválida! Digite Novamente: ");
                     data1 = leia.nextLine();
                 }
-            }else{
+            } else {
                 System.out.println("Data Inválida! Digite Novamente: ");
                 data1 = leia.nextLine();
             }
         }
     }
-    public void escrever(Espetaculo espetaculo){
+
+    public void escrever(Espetaculo espetaculo) {
         File arq = espetaculo.getArq();
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
@@ -107,9 +108,9 @@ public class EspetaculoDao implements Dao{
             //Precisamos passar o objeto FileReader em seu construtor
             fileWriter = new FileWriter(arq.getAbsolutePath(), true);
             bufferedWriter = new BufferedWriter(fileWriter);
-            
-            for(int i = 0; i < espetaculo.getFk_Artista().size(); i++){
-                
+
+            for (int i = 0; i < espetaculo.getFk_Artista().size(); i++) {
+
                 bufferedWriter.write(Integer.toString(espetaculo.getIdEspetaculo()));
                 bufferedWriter.write(";");
                 bufferedWriter.write(espetaculo.getNome());
@@ -128,7 +129,7 @@ public class EspetaculoDao implements Dao{
                 bufferedWriter.write(";");
                 bufferedWriter.write(Integer.toString(espetaculo.getFk_Artista().get(i).getIDArtista()));
             }
-            
+
         } catch (IOException e) {
             System.out.println("Não foi possível escrever no arquivo");
         } finally {
@@ -141,6 +142,7 @@ public class EspetaculoDao implements Dao{
             }
         }
     }
+
     @Override
     public void Alterar() {
         System.out.println("Informe o Código da Apresentação\n");
@@ -161,8 +163,8 @@ public class EspetaculoDao implements Dao{
         this.FinalizaAlteracao(espetaculo, newespetaculo);
 
     }
-    
-    public void FinalizaAlteracao(Espetaculo espetaculo, Espetaculo newespetaculo){
+
+    public void FinalizaAlteracao(Espetaculo espetaculo, Espetaculo newespetaculo) {
         /*private int idEspetaculo;
          private String nome;
         private Date dataInicio;
@@ -172,7 +174,7 @@ public class EspetaculoDao implements Dao{
                 private int duracaoMinutos;
         private TipoEspetaculo fk_TipoDeEspetaculo;
         private LinkedList<Artista> fk_Artista = new LinkedList<Artista>();*/
-        
+
         newespetaculo.setIdEspetaculo(espetaculo.getIdEspetaculo());
         newespetaculo.setNome(espetaculo.getNome());
         newespetaculo.setDataInicio(espetaculo.getDataInicio());
@@ -183,7 +185,7 @@ public class EspetaculoDao implements Dao{
         newespetaculo.setFk_TipoDeEspetaculo(espetaculo.getFk_TipoDeEspetaculo());
         newespetaculo.setFk_Artista(espetaculo.getFk_Artista());
         //fazer um for? 
-        
+
         System.out.println(
                 "1-Nome do Espetáculo\n"
                 + "2-Data de início\n"
@@ -193,7 +195,7 @@ public class EspetaculoDao implements Dao{
                 + "6-Duração do Espetáculo em minutos\n"
                 + "7-Tipo de Espetáculo\n"
                 + "8-Sair");
-        
+
         Scanner leia = new Scanner(System.in);
         System.out.println("Informe a opção selecionada");
         boolean valido = false;
@@ -221,19 +223,19 @@ public class EspetaculoDao implements Dao{
                     valido = false;
                     String e;
                     e = leia.nextLine();
-                        Espetaculo espe = Espetaculo.buscaID(Integer.parseInt(e));
-                        if (e != null) {
-                            newespetaculo.setNome(e);
-                            valido = true;
-                        } else {
-                            System.out.println("Espetáculo não Encontrado. Informe novamente: ");
+                    Espetaculo espe = Espetaculo.buscaID(Integer.parseInt(e));
+                    if (e != null) {
+                        newespetaculo.setNome(e);
+                        valido = true;
+                    } else {
+                        System.out.println("Espetáculo não Encontrado. Informe novamente: ");
 
-                        }
-                    
+                    }
+
                     break;
                 case 2:
                     Date datanew = new Date();
-                    datanew.setDataInicio(espetaculo.getDataInicio());
+                    datanew.setTime(espetaculo.getDataInicio());
                     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                     System.out.println("Data da Apresentação: " + format.format(datanew));
                     System.out.println("Nova Data da Apresentação: ");
@@ -246,7 +248,7 @@ public class EspetaculoDao implements Dao{
                         df.setLenient(false);
                         try {
                             datanew = df.parse(novadata);
-                            newespetaculo.setData(datanew.getTime());
+                            newespetaculo.setDataInicio(datanew.getTime());
                             valido = true;
                         } catch (ParseException ex) {
                             System.out.println("Data Inválida! Digite Novamente: ");
@@ -261,7 +263,7 @@ public class EspetaculoDao implements Dao{
                     System.out.println("Data da Apresentação: " + format1.format(data1));
                     System.out.println("Nova Data da Apresentação: ");
                     String newdata = leia.nextLine();
-                    
+
                     valido = false;
                     while (!valido) {
 
@@ -270,17 +272,17 @@ public class EspetaculoDao implements Dao{
                         Date DataInicio = new Date();
                         DataInicio.setTime(newespetaculo.getDataInicio());
                         try {
-                            if(DataInicio.compareTo(data1)<=0){
-                            data1 = df.parse(newdata);
-                            newespetaculo.setDataFim(data1.getTime());
-                            valido = true;
-                            }else{
+                            if (DataInicio.compareTo(data1) <= 0) {
+                                data1 = df.parse(newdata);
+                                newespetaculo.setDataFim(data1.getTime());
+                                valido = true;
+                            } else {
                                 throw new IllegalArgumentException("Data Final maior que a Data Inicial");
                             }
                         } catch (ParseException ex) {
                             System.out.println("Data Inválida! Digite Novamente: ");
                             newdata = leia.nextLine();
-                        } catch(IllegalArgumentException exc){
+                        } catch (IllegalArgumentException exc) {
                             exc.getMessage();
                             newdata = leia.nextLine();
                         }
@@ -288,49 +290,53 @@ public class EspetaculoDao implements Dao{
                     break;
                 case 4:
                     //Descrição do Espetáculo
-                    System.out.println("Descrição do espetáculo: "+ espetaculo.getDescricao());
+                    System.out.println("Descrição do espetáculo: " + espetaculo.getDescricao());
                     System.out.println("Nova descrição:");
                     valido = false;
                     String descricao;
                     descricao = leia.nextLine();
-                        Espetaculo espeta = Espetaculo.buscaID(Integer.parseInt(descricao));
-                        if (descricao != null) {
-                            newespetaculo.setDescricao(descricao);
-                            valido = true;
-                        } else {
-                            System.out.println("Espetáculo não Encontrado. Informe novamente: ");
+                    Espetaculo espeta = Espetaculo.buscaID(Integer.parseInt(descricao));
+                    if (descricao != null) {
+                        newespetaculo.setDescricao(descricao);
+                        valido = true;
+                    } else {
+                        System.out.println("Espetáculo não Encontrado. Informe novamente: ");
 
-                        }
+                    }
                     break;
                 case 5:
                     //Faixa etária
                     System.out.println("Faixa Etária: " + espetaculo.getFaixaEtaria());
                     System.out.println("Nova Faixa Etária: ");
-                    int valor = Integer.parseInt(leia.nextLine());
-                    try{
-                        if(valor>0)
-                    newespetaculo.setFaixaEtaria(valor);
-                    
-                    } catch(){
-                    
+                    try {
+                        int valor = Integer.parseInt(leia.nextLine());
+
+                        if (valor > 0) {
+                            newespetaculo.setFaixaEtaria(valor);
+                        }
+
+                    } catch (InputMismatchException ex) {
+                        System.out.println("Faixa Etária inválida.");
                     }
-                    
+
                     break;
                 case 6:
                     //Duração do Espetáculo em minutos
                     System.out.println("Duração do Espetáculo em minutos: " + espetaculo.getDuracaoMinutos());
                     System.out.println("Novo tempo: ");
-                    int valor = Integer.parseInt(leia.nextLine());
-                    try{
-                        if(valor>0)
-                    newespetaculo.setDuracaoMinutos(valor);
+                    try {
+                        int valor = Integer.parseInt(leia.nextLine());
                     
-                    } catch(){
-                    
+                        if (valor > 0) {
+                            newespetaculo.setDuracaoMinutos(valor);
+                        }
+
+                    } catch (InputMismatchException ex) {
+                        System.out.println("Duração inválida.");
                     }
-                    
+
                     break;
-                case 7:  
+                case 7:
                     //Tipo de Espetáculo
                     System.out.println("Tipo do Espetáculo: " + espetaculo.getFk_TipoDeEspetaculo());
                     System.out.println("Novo Tipo de Espetáculo: ");
@@ -338,7 +344,7 @@ public class EspetaculoDao implements Dao{
                     valido = false;
                     while (!valido) {
                         novoTipo = leia.nextLine();
-                        TipoEspetaculo tipoEspe = TipoEspetaculo.buscaID(Integer.parseInt(tipoEspe));
+                        TipoEspetaculo tipoEspe = TipoEspetaculo.buscaID(Integer.parseInt(novoTipo));
                         if (tipoEspe != null) {
                             newespetaculo.setFk_TipoDeEspetaculo(tipoEspe);
                             valido = true;
@@ -354,8 +360,8 @@ public class EspetaculoDao implements Dao{
         }
         this.Copia(espetaculo, newespetaculo);
     }
-    
-    private void Copia(Espetaculo espetaculo, Espetaculo newespetaculo){
+
+    private void Copia(Espetaculo espetaculo, Espetaculo newespetaculo) {
         String linhaAlterar = Espetaculo.TransformarEmLinha(espetaculo);
         String linhaAlterada = Espetaculo.TransformarEmLinha(newespetaculo);
         File file = espetaculo.getArq();
@@ -369,7 +375,7 @@ public class EspetaculoDao implements Dao{
             bufferedWriter = new BufferedWriter(fw);
             while (s.hasNextLine()) {
                 String linha = s.nextLine();
-                if (linha.equals(linhaAlterar)) {
+                if (linha.contains(linhaAlterar)) {
                     linha = linha.replace(linhaAlterar, linhaAlterada);
                 }
 
@@ -407,8 +413,9 @@ public class EspetaculoDao implements Dao{
             }
         }
 
-        }
-        private void Copia(Espetaculo espetaculo) {
+    }
+
+    private void Copia(Espetaculo espetaculo) {
         String linhaExcluir = Espetaculo.TransformarEmLinha(espetaculo);
         File file = espetaculo.getArq();
         File nf = new File("Dados", "temporario.tmp");
@@ -421,7 +428,7 @@ public class EspetaculoDao implements Dao{
             bufferedWriter = new BufferedWriter(fw);
             while (s.hasNextLine()) {
                 String linha = s.nextLine();
-                if (!(linha.equals(linhaExcluir))) {
+                if (!(linha.contains(linhaExcluir))) {
                     bufferedWriter.write(linha);
                     bufferedWriter.newLine();
                     fw.flush();
@@ -457,7 +464,8 @@ public class EspetaculoDao implements Dao{
         }
 
     }
-        @Override
+
+    @Override
     public void Excluir() {
         System.out.println("Informe o Código do Espetaculo que deseja excluir\n");
         Scanner leia = new Scanner(System.in);
@@ -482,5 +490,4 @@ public class EspetaculoDao implements Dao{
 
     }
 
-   }
-
+}
