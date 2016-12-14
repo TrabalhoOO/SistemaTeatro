@@ -25,6 +25,10 @@ public class Espetaculo implements Contavel {
     public void setFk_Artista(Artista artista) {
         this.fk_Artista.add(artista);
     }
+    
+    public void setFk_Artista(LinkedList<Artista> artistas){
+        this.fk_Artista.addAll(artistas);
+    }
 
     public Long getDataInicio() {
         return dataInicio.getTime();
@@ -205,5 +209,35 @@ public class Espetaculo implements Contavel {
         }
 
         return null;
+    }
+    public static String TransformarEmLinha(Espetaculo espetaculo) {
+        
+        /*private String nome;
+        private Date dataInicio;
+        private Date dataFim;
+        private String descricao;
+        private int faixaEtaria;
+        private int duracaoMinutos;
+        private TipoEspetaculo fk_TipoDeEspetaculo;*/
+        
+        String linha = Integer.toString(espetaculo.getIdEspetaculo())
+                + ";"
+                + espetaculo.getIdEspetaculo()
+                + ";"
+                + espetaculo.getNome()
+                + ";"
+                + espetaculo.getDataInicio()
+                + ";"
+                + espetaculo.getDataFim()
+                + ";"
+                + espetaculo.getDescricao()
+                + ";"
+                + espetaculo.getFaixaEtaria()
+                + ";"
+                + espetaculo.getDuracaoMinutos()
+                + ";"
+                + espetaculo.getFk_TipoDeEspetaculo().getIdTipoEspetaculo();
+        
+        return linha;
     }
 }
