@@ -4,6 +4,10 @@ import java.io.*;
 import java.util.Date;
 import java.util.LinkedList;
 
+/**
+ *
+ * @author jpdia
+ */
 public class Artista implements Contavel{
 
     
@@ -17,70 +21,143 @@ public class Artista implements Contavel{
     private String RG;
     private String celular;
     private String email;
+
+    /**
+     *
+     */
     public LinkedList<Espetaculo> fk_Espetaculo = new LinkedList<Espetaculo>();
     private static final File arq = new File("Dados", "Artista.txt");
+
+    /**
+     *
+     */
     public static final String UTF8_BOM = "\uFEFF";
 
+    /**
+     *
+     * @return
+     */
     public int getIDArtista() {
         return idArtista;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getDataNasc() {
         return this.dataNasc.getTime();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCPF() {
         return CPF;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getRG() {
         return RG;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCelular() {
         return celular;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @return
+     */
     public File getArq() {
         return arq;
     }
 
+    /**
+     *
+     * @param idArtista
+     */
     public void setIDArtista(int idArtista) {
         this.idArtista = idArtista;
     }
 
+    /**
+     *
+     * @param nome
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     *
+     * @param dataNasc
+     */
     public void setDataNasc(Long dataNasc) {
         this.dataNasc = new Date(dataNasc);
     }
 
+    /**
+     *
+     * @param CPF
+     */
     public void setCPF(String CPF) {
         this.CPF = CPF;
     }
 
+    /**
+     *
+     * @param RG
+     */
     public void setRG(String RG) {
         this.RG = RG;
     }
 
+    /**
+     *
+     * @param celular
+     */
     public void setCelular(String celular) {
         this.celular = celular;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @param codigo
+     * @return
+     */
     public static Artista buscaID(int codigo) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -125,6 +202,11 @@ public class Artista implements Contavel{
         return null;
     }
     
+    /**
+     *
+     * @param artista
+     * @return
+     */
     public static String TransformarEmLinha(Artista artista) {
         String linha = Integer.toString(artista.getIDArtista())
                 + ";"

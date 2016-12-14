@@ -18,11 +18,22 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ *
+ * @author jpdia
+ */
 public class ApresentacaoDao implements Dao {
 
     Apresentacao apresentacao = new Apresentacao();
+
+    /**
+     *
+     */
     public static final String UTF8_BOM = "\uFEFF";
 
+    /**
+     *
+     */
     @Override
     public void Incluir() {
         Scanner leia = new Scanner(System.in);
@@ -162,6 +173,9 @@ public class ApresentacaoDao implements Dao {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void Alterar() {
         System.out.println("Informe o Código da Apresentação\n");
@@ -183,6 +197,9 @@ public class ApresentacaoDao implements Dao {
 
     }
 
+    /**
+     *
+     */
     @Override
     public void Excluir() {
         System.out.println("Informe o Código da Apresentação que deseja excluir\n");

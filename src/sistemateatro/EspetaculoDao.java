@@ -13,11 +13,22 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ *
+ * @author jpdia
+ */
 public class EspetaculoDao implements Dao{
 
     Espetaculo espetaculo = new Espetaculo();
+
+    /**
+     *
+     */
     public static final String UTF8_BOM = "\uFEFF";
 
+    /**
+     *
+     */
     @Override
     public void Incluir() {
         Scanner leia = new Scanner(System.in);
@@ -82,10 +93,18 @@ public class EspetaculoDao implements Dao{
             }
         }
     }
+
+    /**
+     *
+     */
     @Override
     public void Alterar() {
 
     }
+
+    /**
+     *
+     */
     @Override
     public void Excluir() {
 

@@ -11,11 +11,22 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ *
+ * @author jpdia
+ */
 public class ArtistaDao implements Dao {
 
     Artista artista = new Artista();
+
+    /**
+     *
+     */
     public static final String UTF8_BOM = "\uFEFF";
 
+    /**
+     *
+     */
     @Override
     public void Incluir() {
         Scanner leia = new Scanner(System.in);
@@ -120,6 +131,9 @@ public class ArtistaDao implements Dao {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void Alterar() {
         System.out.println("Informe o Código do Artista\n");
@@ -140,6 +154,9 @@ public class ArtistaDao implements Dao {
         this.FinalizaAlteracao(artista, newartista);
     }
 
+    /**
+     *
+     */
     @Override
     public void Excluir() {
         System.out.println("Informe o Código do Artista que deseja excluir\n");

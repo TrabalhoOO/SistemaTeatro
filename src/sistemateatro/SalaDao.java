@@ -7,11 +7,22 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ *
+ * @author jpdia
+ */
 public class SalaDao implements Dao {
 
     Sala sala = new Sala();
+
+    /**
+     *
+     */
     public static final String UTF8_BOM = "\uFEFF";
 
+    /**
+     *
+     */
     @Override
     public void Incluir() {
         Scanner leia = new Scanner(System.in);
@@ -105,6 +116,9 @@ public class SalaDao implements Dao {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void Alterar() {
         System.out.println("Informe o Código da Sala\n");
@@ -126,6 +140,9 @@ public class SalaDao implements Dao {
 
     }
 
+    /**
+     *
+     */
     @Override
     public void Excluir() {
         System.out.println("Informe o Código da Sala que deseja excluir\n");

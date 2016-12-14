@@ -2,14 +2,25 @@ package sistemateatro;
 
 import java.util.Scanner;
 
+/**
+ *
+ * @author jpdia
+ */
 public class TelaMantenedor {
 
     private Pessoa pessoa;
 
+    /**
+     *
+     * @param pessoa
+     */
     public TelaMantenedor(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
 
+    /**
+     *
+     */
     public void ConstruirTelaGeral() {
         System.out.println("Usuario:" + this.getPessoa().getNome() + "\t\t\tMenu\n");
         System.out.println("Escolha sua opção: \n");
@@ -77,6 +88,9 @@ public class TelaMantenedor {
         }
     }
 
+    /**
+     *
+     */
     public void ConstruirTelaPessoa() {
         System.out.println("Escolha sua opção: \n");
         System.out.println("1-Incluir\n");
@@ -139,6 +153,9 @@ public class TelaMantenedor {
         }
     }
 
+    /**
+     *
+     */
     public void ConstruirTelaApresentacao() {
         System.out.println("Escolha sua opção: \n");
         System.out.println("1-Incluir\n");
@@ -201,6 +218,10 @@ public class TelaMantenedor {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Pessoa getPessoa() {
         return pessoa;
     }

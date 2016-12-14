@@ -3,6 +3,10 @@ import java.io.*;
 import java.util.Date;
 import java.util.LinkedList;
 
+/**
+ *
+ * @author jpdia
+ */
 public class TipoEspetaculo {
 
     static TipoEspetaculo buscaID(int parseInt) {
@@ -11,6 +15,14 @@ public class TipoEspetaculo {
 	private int idTipoEspetaculo;
 	private static int genID = 0;
 	private String descricao;
-	public Preferencia preferencia;
-	public LinkedList<Espetaculo> espetaculo = new LinkedList<Espetaculo>();
+
+    /**
+     *
+     */
+    public Preferencia preferencia;
+
+    /**
+     *
+     */
+    public LinkedList<Espetaculo> espetaculo = new LinkedList<Espetaculo>();
 }

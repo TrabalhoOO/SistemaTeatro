@@ -3,13 +3,25 @@ package sistemateatro;
 import java.io.*;
 import java.util.LinkedList;
 
+/**
+ *
+ * @author jpdia
+ */
 public class FormaPagamento {
 
     private int idForma;
     private String descricao;
     private static final File arq = new File("Dados", "FormaPagamento.txt");
+
+    /**
+     *
+     */
     public static final String UTF8_BOM = "\uFEFF";
 
+    /**
+     *
+     * @return
+     */
     public static LinkedList<FormaPagamento> buscaTodos() {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -56,18 +68,34 @@ public class FormaPagamento {
         return s;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getIdForma() {
         return idForma;
     }
 
+    /**
+     *
+     * @param idForma
+     */
     public void setIdForma(int idForma) {
         this.idForma = idForma;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescricao() {
         return descricao;
     }
 
+    /**
+     *
+     * @param descricao
+     */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }

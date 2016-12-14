@@ -7,10 +7,17 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ *
+ * @author jpdia
+ */
 public class CompraDao {
 
     private Compra compra = new Compra();
 
+    /**
+     *
+     */
     public void Incluir() {
         Scanner leia = new Scanner(System.in);
         System.out.println("Escolha o Espetáculo e informe o código Escolhido: \n");
@@ -181,11 +188,19 @@ public class CompraDao {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDataAtual() {
         Date date = new Date();
         return date;
     }
 
+    /**
+     *
+     * @param idPessoa
+     */
     public void VisulizarCompra(int idPessoa) {
         LinkedList<Compra> compras = Compra.ComprasporPessoa(idPessoa);
         for (Compra compra : compras) {
@@ -196,20 +211,20 @@ public class CompraDao {
             }
             System.out.println("\n");
             System.out.println("Valor Total: " + compra.getValorTotal() + "\n");
-            System.out.println("Nome do Espetáculo: " + compra.getFk_Apresentacao().getFk_Espetaculo().getDescricao());
-            System.out.println("Nome do Cliente: " + compra.getFk_Pessoa().getNome());
+            System.out.println("Nome do Espetáculo: " + compra.getFk_Apresentacao().getFk_Espetaculo().getDescricao()+ "\n");
+            System.out.println("Nome do Cliente: " + compra.getFk_Pessoa().getNome()+ "\n");
             if (compra.getFormaPagamento().equals("Cartão de Crédito")) {
-                System.out.println("Forma de Pagamento: " + compra.getFormaPagamento());
-                System.out.println("Número do Cartão: " + compra.getNumeroCartao());
-                System.out.println("Bandeira do Cartão: " + compra.getBandeiraCartao());
-                System.out.println("Data de Validade: " + compra.getDatavalidade());
+                System.out.println("Forma de Pagamento: " + compra.getFormaPagamento()+ "\n");
+                System.out.println("Número do Cartão: " + compra.getNumeroCartao()+ "\n");
+                System.out.println("Bandeira do Cartão: " + compra.getBandeiraCartao()+ "\n");
+                System.out.println("Data de Validade: " + compra.getDatavalidade()+ "\n");
             } else {
                 Date data = new Date();
                 data.setTime(compra.getDataVencimento());
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-                System.out.println("Número do Boleto: " + compra.getNumBoleto());
-                System.out.println("Data de Vencimento: " + format.format(data));
+                System.out.println("Número do Boleto: " + compra.getNumBoleto()+ "\n");
+                System.out.println("Data de Vencimento: " + format.format(data)+ "\n");
             }
 
         }

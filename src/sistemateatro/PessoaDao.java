@@ -11,11 +11,22 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ *
+ * @author jpdia
+ */
 public class PessoaDao implements Dao {
 
     Pessoa pessoa = new Pessoa();
+
+    /**
+     *
+     */
     public static final String UTF8_BOM = "\uFEFF";
 
+    /**
+     *
+     */
     @Override
     public void Incluir() {
         Scanner leia = new Scanner(System.in);
@@ -83,6 +94,9 @@ public class PessoaDao implements Dao {
         PessoaDao.escrever(pessoa);
     }
 
+    /**
+     *
+     */
     public void IncluirMantenedor() {
         Scanner leia = new Scanner(System.in);
         System.out.println("Primeiro Acesso Ao Sistema! Forneça os dados do Administrador: \n");
@@ -150,6 +164,9 @@ public class PessoaDao implements Dao {
 
     }
 
+    /**
+     *
+     */
     @Override
     public void Alterar() {
         System.out.println("Informe o Código da Pessoa\n");
@@ -171,6 +188,9 @@ public class PessoaDao implements Dao {
 
     }
 
+    /**
+     *
+     */
     @Override
     public void Excluir() {
         System.out.println("Informe o Código do Espectador que deseja excluir\n");
@@ -420,6 +440,11 @@ public class PessoaDao implements Dao {
         this.Copia(pessoa, newpessoa);
     }
 
+    /**
+     *
+     * @param pessoa
+     * @param newpessoa
+     */
     public void Copia(Pessoa pessoa, Pessoa newpessoa) {
         String linhaAlterar = Pessoa.TransformarEmLinha(pessoa);
         String linhaAlterada = Pessoa.TransformarEmLinha(newpessoa);
@@ -475,6 +500,10 @@ public class PessoaDao implements Dao {
         
     }
 
+    /**
+     *
+     * @param pessoa
+     */
     public void Copia(Pessoa pessoa) {
         String linhaExcluir = Pessoa.TransformarEmLinha(pessoa);
         File file = pessoa.getArq();

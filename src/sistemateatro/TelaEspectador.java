@@ -2,10 +2,18 @@ package sistemateatro;
 
 import java.util.Scanner;
 
+/**
+ *
+ * @author jpdia
+ */
 public class TelaEspectador {
 
     private Pessoa pessoa;
 
+    /**
+     *
+     * @param pessoa
+     */
     public TelaEspectador(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
@@ -69,6 +77,10 @@ public class TelaEspectador {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public Pessoa getPessoa() {
         return pessoa;
     }
@@ -81,8 +93,10 @@ public class TelaEspectador {
         System.out.println("Escolha sua opção: \n");
         System.out.println("1-Realizar Compra\n");
         System.out.println("2-Visualizar Compras\n");
+        System.out.println("3-Sair\n");
         Scanner leia = new Scanner(System.in);
         System.out.println("Informe a opção selecionada: ");
+        CompraDao compra = new CompraDao();
         boolean valido = false;
         int opcao = 0;
         while (!valido) {
@@ -96,6 +110,38 @@ public class TelaEspectador {
                     opcao = Integer.parseInt(leia.nextLine());
                 }
 
+            }
+        }
+        while (opcao != 3) {
+            switch (opcao) {
+                case 1:
+                    compra.Incluir();
+                    break;
+                case 2:
+                    compra.VisulizarCompra(this.pessoa.getIdPessoa());
+                    break;
+                default:
+                    break;
+            }
+            System.out.println("Escolha sua opção: \n");
+            System.out.println("1-Realizar Compra\n");
+            System.out.println("2-Visualizar Compras\n");
+            System.out.println("3-Sair\n");
+            System.out.println("Informe a opção selecionada: ");
+            valido = false;
+            opcao = 0;
+            while (!valido) {
+
+                try {
+                    opcao = Integer.parseInt(leia.nextLine());
+                    valido = true;
+                } catch (NumberFormatException e) {
+                    {
+                        System.out.println("Valor inválido! Digite Novamente: ");
+                        opcao = Integer.parseInt(leia.nextLine());
+                    }
+
+                }
             }
         }
     }

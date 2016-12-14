@@ -4,6 +4,10 @@ import java.io.*;
 import java.util.Date;
 import java.util.LinkedList;
 
+/**
+ *
+ * @author jpdia
+ */
 public class Compra implements Contavel {
 
     private int numeroReserva;
@@ -19,104 +23,209 @@ public class Compra implements Contavel {
     private String formaPagamento;
 
     private static final File arq = new File("Dados", "Compra.txt");
+
+    /**
+     *
+     */
     public static final String UTF8_BOM = "\uFEFF";
 
+    /**
+     *
+     * @return
+     */
     public String getFormaPagamento() {
         return formaPagamento;
     }
 
+    /**
+     *
+     * @param formaPagamento
+     */
     public void setFormaPagamento(String formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getDataVencimento() {
         return dataVencimento.getTime();
     }
 
+    /**
+     *
+     * @param dataVencimento
+     */
     public void setDataVencimento(long dataVencimento) {
         this.dataVencimento = new Date(dataVencimento);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNumeroCartao() {
         return numeroCartao;
     }
 
+    /**
+     *
+     * @param numeroCartao
+     */
     public void setNumeroCartao(String numeroCartao) {
         this.numeroCartao = numeroCartao;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getBandeiraCartao() {
         return bandeiraCartao;
     }
 
+    /**
+     *
+     * @param bandeiraCartao
+     */
     public void setBandeiraCartao(String bandeiraCartao) {
         this.bandeiraCartao = bandeiraCartao;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDatavalidade() {
         return datavalidade;
     }
 
+    /**
+     *
+     * @param datavalidade
+     */
     public void setDatavalidade(String datavalidade) {
         this.datavalidade = datavalidade;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNumBoleto() {
         return numBoleto;
     }
 
+    /**
+     *
+     * @param numBoleto
+     */
     public void setNumBoleto(String numBoleto) {
         this.numBoleto = numBoleto;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getNumeroReserva() {
         return numeroReserva;
     }
 
+    /**
+     *
+     * @param numeroReserva
+     */
     public void setNumeroReserva(int numeroReserva) {
         this.numeroReserva = numeroReserva;
     }
 
+    /**
+     *
+     * @return
+     */
     public LinkedList<Integer> getAssentos() {
         return assentos;
     }
 
+    /**
+     *
+     * @param assento
+     */
     public void setAssentos(int assento) {
         this.assentos.add(assento);
     }
 
+    /**
+     *
+     * @param Totalassento
+     */
     public void setAssentos(LinkedList<Integer> Totalassento) {
         this.assentos.addAll(Totalassento);
     }
 
+    /**
+     *
+     * @return
+     */
     public double getValorTotal() {
         return valorTotal;
     }
 
+    /**
+     *
+     * @param valorTotal
+     */
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
 
+    /**
+     *
+     * @return
+     */
     public Apresentacao getFk_Apresentacao() {
         return fk_Apresentacao;
     }
 
+    /**
+     *
+     * @param fk_Apresentacao
+     */
     public void setFk_Apresentacao(Apresentacao fk_Apresentacao) {
         this.fk_Apresentacao = fk_Apresentacao;
     }
 
+    /**
+     *
+     * @return
+     */
     public Pessoa getFk_Pessoa() {
         return fk_Pessoa;
     }
 
+    /**
+     *
+     * @param fk_Pessoa
+     */
     public void setFk_Pessoa(Pessoa fk_Pessoa) {
         this.fk_Pessoa = fk_Pessoa;
     }
 
+    /**
+     *
+     * @return
+     */
     public File getArq() {
         return arq;
     }
 
+    /**
+     *
+     * @param codCompra
+     * @return
+     */
     public static Compra buscaID(int codCompra) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -175,6 +284,11 @@ public class Compra implements Contavel {
         return null;
     }
 
+    /**
+     *
+     * @param idSala
+     * @return
+     */
     public static LinkedList<Integer> totalAssentosComprados(int idSala) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -214,6 +328,12 @@ public class Compra implements Contavel {
         return null;
     }
 
+    /**
+     *
+     * @param idSala
+     * @param idCompra
+     * @return
+     */
     public static LinkedList<Integer> totalAssentosCompradosporCompra(int idSala, int idCompra) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -254,6 +374,11 @@ public class Compra implements Contavel {
         return null;
     }
 
+    /**
+     *
+     * @param codPessoa
+     * @return
+     */
     public static LinkedList<Compra> ComprasporPessoa(int codPessoa) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -299,7 +424,10 @@ public class Compra implements Contavel {
         return s;
     }
 
-     public static void TotalporEspetaculo() {
+    /**
+     *
+     */
+    public static void TotalporEspetaculo() {
         Reader fileReader = null;
         boolean existe = arq.exists();
         Compra compra = null;

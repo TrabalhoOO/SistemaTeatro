@@ -7,23 +7,36 @@
 		<mkdir dir="classes"/>
 	</target>
 	<target name="clean">
-		<delete dir="classes"/>
+		<delete dir="dist"/>
+	</target>
+	<target name="jar">
+		<mkdir dir="dist"/>
 	</target>
 	<target depends="init" name="build">
 		<javac srcdir="." destdir="classes" source="1.5" target="1.5" fork="yes">
 			<classpath refid="build.classpath"/>
-			<include name="Temporada.java"/>
 			<include name="Sala.java"/>
 			<include name="Apresentacao.java"/>
-			<include name="FormaPagamento.java"/>
-			<include name="DetalhesCartao.java"/>
-			<include name="FormadePagamentoCompra.java"/>
 			<include name="Compra.java"/>
 			<include name="Pessoa.java"/>
 			<include name="Preferencia.java"/>
 			<include name="TipoEspetaculo.java"/>
 			<include name="Espetaculo.java"/>
 			<include name="Artista.java"/>
+			<include name="ArtistaDao.java"/>
+			<include name="ApresentacaoDao.java"/>
+			<include name="CompraDao.java"/>
+			<include name="Contavel.java"/>
+			<include name="Dao.java"/>
+			<include name="EspetaculoDao.java"/>
+			<include name="DataEspetaculoMenorQue3.java"/>
+			<include name="GeradorID.java"/>
+			<include name="PessoaDao.java"/>
+			<include name="SalaDao.java"/>
+			<include name="Tela.java"/>
+			<include name="TelaEspectador.java"/>
+			<include name="TelaMantenedor.java"/>
+
 		</javac>
 	</target>
 </project>
