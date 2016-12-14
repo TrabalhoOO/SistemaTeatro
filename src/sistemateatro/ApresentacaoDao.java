@@ -232,13 +232,11 @@ public class ApresentacaoDao implements Dao {
         newapresentacao.setData(apresentacao.getData());
         newapresentacao.setHorario(apresentacao.getHorario());
         newapresentacao.setValorIngresso(apresentacao.getValorIngresso());
-        System.out.println(
-                "1-Número da Sala\n"
-                + "2-Código do Espetaculo\n"
-                + "3-Data da Apresentação\n"
-                + "4-Horário da Apresentação\n"
-                + "5-Valor Do ingresso\n"
-                + "6-Sair\n");
+        System.out.println("1-Código do Espetaculo\n"
+                + "2-Data da Apresentação\n"
+                + "3-Horário da Apresentação\n"
+                + "4-Valor Do ingresso\n"
+                + "5-Sair\n");
         Scanner leia = new Scanner(System.in);
         System.out.println("Informe a opção selecionada");
         boolean valido = false;
@@ -257,11 +255,11 @@ public class ApresentacaoDao implements Dao {
             }
         }
 
-        while (opcao != 6) {
+        while (opcao != 5) {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Número da Sala: " + apresentacao.getFk_Sala().getIdSala());
+                    System.out.println("Número da Sala: " + newapresentacao.getFk_Sala().getIdSala());
                     System.out.println("Nova Sala: ");
                     valido = false;
                     while (!valido) {
@@ -279,7 +277,7 @@ public class ApresentacaoDao implements Dao {
                     }
                     break;
                 case 2:
-                    System.out.println("Código do Espetáculo: " + apresentacao.getFk_Espetaculo().getIdEspetaculo());
+                    System.out.println("Código do Espetáculo: " + newapresentacao.getFk_Espetaculo().getIdEspetaculo());
                     System.out.println("Novo Espetáculo: ");
                     String espetaculo;
                     valido = false;
@@ -298,7 +296,7 @@ public class ApresentacaoDao implements Dao {
                     break;
                 case 3:
                     Date data = new Date();
-                    data.setTime(apresentacao.getData());
+                    data.setTime(newapresentacao.getData());
                     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                     System.out.println("Data da Apresentação: " + format.format(data));
                     System.out.println("Nova Data da Apresentação: ");
@@ -321,7 +319,7 @@ public class ApresentacaoDao implements Dao {
                     break;
                 case 4:
                     Date hora = new Date();
-                    hora.setTime(apresentacao.getHorario());
+                    hora.setTime(newapresentacao.getHorario());
                     SimpleDateFormat formatHora = new SimpleDateFormat("HH:mm");
                     System.out.println("Hora da Apresentação: " + formatHora.format(hora));
                     System.out.println("Nova Data da Apresentação: ");
@@ -342,7 +340,7 @@ public class ApresentacaoDao implements Dao {
                     }
                     break;
                 case 5:
-                    System.out.println("Valor da Apresentação: " + apresentacao.getValorIngresso());
+                    System.out.println("Valor da Apresentação: " + newapresentacao.getValorIngresso());
                     System.out.println("Novo Valor: ");
                     double valor = Double.parseDouble(leia.nextLine());
                     newapresentacao.setValorIngresso(valor);

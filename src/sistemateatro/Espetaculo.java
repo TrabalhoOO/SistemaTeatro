@@ -1,13 +1,10 @@
+
 package sistemateatro;
 
 import java.io.*;
 import java.util.Date;
 import java.util.LinkedList;
 
-/**
- *
- * @author jpdia
- */
 public class Espetaculo implements Contavel {
 
     private int idEspetaculo;
@@ -22,154 +19,82 @@ public class Espetaculo implements Contavel {
     private static final File arq = new File("Dados", "Espetaculo.txt");
     private static final String UTF8_BOM = "\uFEFF";
 
-    /**
-     *
-     * @return
-     */
     public LinkedList<Artista> getFk_Artista() {
         return fk_Artista;
     }
 
-    /**
-     *
-     * @param artista
-     */
     public void setFk_Artista(Artista artista) {
         this.fk_Artista.add(artista);
     }
+    
+    public void setFk_Artista(LinkedList<Artista> artistas){
+        this.fk_Artista.addAll(artistas);
+    }
 
-    /**
-     *
-     * @return
-     */
     public Long getDataInicio() {
         return dataInicio.getTime();
     }
 
-    /**
-     *
-     * @param dataInicio
-     */
     public void setDataInicio(Long dataInicio) {
         this.dataInicio.setTime(dataInicio);
     }
 
-    /**
-     *
-     * @return
-     */
     public Long getDataFim() {
         return dataFim.getTime();
     }
 
-    /**
-     *
-     * @param dataFim
-     */
     public void setDataFim(Long dataFim) {
         this.dataFim.setTime(dataFim);
     }
 
-    /**
-     *
-     * @return
-     */
     public int getIdEspetaculo() {
         return idEspetaculo;
     }
 
-    /**
-     *
-     * @param idEspetaculo
-     */
     public void setIdEspetaculo(int idEspetaculo) {
         this.idEspetaculo = idEspetaculo;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getNome() {
         return nome;
     }
 
-    /**
-     *
-     * @param nome
-     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getDescricao() {
         return descricao;
     }
 
-    /**
-     *
-     * @param descricao
-     */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
-    /**
-     *
-     * @return
-     */
     public int getFaixaEtaria() {
         return faixaEtaria;
     }
 
-    /**
-     *
-     * @param faixaEtaria
-     */
     public void setFaixaEtaria(int faixaEtaria) {
         this.faixaEtaria = faixaEtaria;
     }
 
-    /**
-     *
-     * @return
-     */
     public int getDuracaoMinutos() {
         return duracaoMinutos;
     }
 
-    /**
-     *
-     * @param duracaoMinutos
-     */
     public void setDuracaoMinutos(int duracaoMinutos) {
         this.duracaoMinutos = duracaoMinutos;
     }
 
-    /**
-     *
-     * @return
-     */
     public TipoEspetaculo getFk_TipoDeEspetaculo() {
         return fk_TipoDeEspetaculo;
     }
 
-    /**
-     *
-     * @param fk_TipoDeEspetaculo
-     */
     public void setFk_TipoDeEspetaculo(TipoEspetaculo fk_TipoDeEspetaculo) {
         this.fk_TipoDeEspetaculo = fk_TipoDeEspetaculo;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public File getArq() {
         return arq;
@@ -183,11 +108,6 @@ public class Espetaculo implements Contavel {
         return s;
     }
 
-    /**
-     *
-     * @param codigo
-     * @return
-     */
     public static Espetaculo buscaID(int codigo) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -240,10 +160,6 @@ public class Espetaculo implements Contavel {
         return null;
     }
 
-    /**
-     *
-     * @return
-     */
     public static LinkedList<Espetaculo> buscaTodos() {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -294,5 +210,49 @@ public class Espetaculo implements Contavel {
         }
 
         return null;
+    }
+    public static String TransformarEmLinha(Espetaculo espetaculo) {
+        
+        /*private String nome;
+        private Date dataInicio;
+        private Date dataFim;
+        private String descricao;
+        private int faixaEtaria;
+        private int duracaoMinutos;
+        private TipoEspetaculo fk_TipoDeEspetaculo;*/
+        
+        String linha = Integer.toString(espetaculo.getIdEspetaculo())
+                + ";"
+                + espetaculo.getIdEspetaculo()
+                + ";"
+                + espetaculo.getNome()
+                + ";"
+                + espetaculo.getDataInicio()
+                + ";"
+                + espetaculo.getDataFim()
+                + ";"
+                + espetaculo.getDescricao()
+                + ";"
+                + espetaculo.getFaixaEtaria()
+                + ";"
+                + espetaculo.getDuracaoMinutos()
+                + ";"
+                + espetaculo.getFk_TipoDeEspetaculo().getIdTipoEspetaculo();
+        
+        return linha;
+    }
+
+    public void imprimeDados() {
+        System.out.println("\nId:" + this.getIdEspetaculo());
+        System.out.println("Nome do Espetáculo: " + this.getNome());
+        System.out.println("Data de início: " + this.getDataInicio());
+        System.out.println("Data de fim: " + this.getDataFim());
+        System.out.println("Descrição: " + this.getDescricao());
+        System.out.println("Faixa etária: " + this.getFaixaEtaria());
+        System.out.println("Duração em minutos: " + this.getDuracaoMinutos());
+        System.out.println("Tipo de espetaculo: " + this.getFk_TipoDeEspetaculo());
+        for(Artista a: this.fk_Artista){
+            System.out.println("Artista: " + a.getNome());
+        }
     }
 }

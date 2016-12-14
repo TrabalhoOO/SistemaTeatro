@@ -1,14 +1,11 @@
 package sistemateatro;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 
-/**
- *
- * @author jpdia
- */
 public class Pessoa implements Comparable<Pessoa>, Contavel {
 
     private int idPessoa;
@@ -27,254 +24,127 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
     private LinkedList<Preferencia> preferencia = new LinkedList<>();
     private LinkedList<Compra> compra = new LinkedList<>();
     private static final File arq = new File("Dados", "Pessoa.txt");
-
-    /**
-     *
-     */
     public static final String UTF8_BOM = "\uFEFF";
 
-    /**
-     *
-     */
     public Pessoa() {
     }
 
-    /**
-     *
-     * @return
-     */
     public LinkedList<Preferencia> getPreferencia() {
         return preferencia;
     }
 
-    /**
-     *
-     * @param preferencia
-     */
     public void setPreferencia(LinkedList<Preferencia> preferencia) {
         this.preferencia = preferencia;
     }
 
-    /**
-     *
-     * @return
-     */
     public LinkedList<Compra> getCompra() {
         return compra;
     }
 
-    /**
-     *
-     * @param compra
-     */
     public void setCompra(LinkedList<Compra> compra) {
         this.compra = compra;
     }
 
-    /**
-     *
-     * @return
-     */
     public int getIdPessoa() {
         return idPessoa;
     }
 
-    /**
-     *
-     * @param idPessoa
-     */
     public void setIdPessoa(int idPessoa) {
         this.idPessoa = idPessoa;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getNome() {
         return nome;
     }
 
-    /**
-     *
-     * @param nome
-     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getEndereco() {
         return endereco;
     }
 
-    /**
-     *
-     * @param endereco
-     */
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getTelefone() {
         return telefone;
     }
 
-    /**
-     *
-     * @param telefone
-     */
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getEmail() {
         return email;
     }
 
-    /**
-     *
-     * @param email
-     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getLocalTrabalho() {
         return localTrabalho;
     }
 
-    /**
-     *
-     * @param localTrabalho
-     */
     public void setLocalTrabalho(String localTrabalho) {
         this.localTrabalho = localTrabalho;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getEnderecoComercial() {
         return enderecoComercial;
     }
 
-    /**
-     *
-     * @param enderecoComercial
-     */
     public void setEnderecoComercial(String enderecoComercial) {
         this.enderecoComercial = enderecoComercial;
     }
 
-    /**
-     *
-     * @return
-     */
     public Long getDataNasc() {
         return this.dataNasc.getTime();
     }
 
-    /**
-     *
-     * @param tempo
-     */
     public void setDataNasc(Long tempo) {
         this.dataNasc = new Date(tempo);
     }
 
-    /**
-     *
-     * @return
-     */
     public String getCPF() {
         return CPF;
     }
 
-    /**
-     *
-     * @param CPF
-     */
     public void setCPF(String CPF) {
         this.CPF = CPF;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getRG() {
         return RG;
     }
 
-    /**
-     *
-     * @param RG
-     */
     public void setRG(String RG) {
         this.RG = RG;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getLogin() {
         return login;
     }
 
-    /**
-     *
-     * @param login
-     */
     public void setLogin(String login) {
         this.login = login;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getSenha() {
         return senha;
     }
 
-    /**
-     *
-     * @param senha
-     */
     public void setSenha(String senha) {
         this.senha = senha;
     }
 
-    /**
-     *
-     * @return
-     */
     public int getNivelAcesso() {
         return nivelAcesso;
     }
 
-    /**
-     *
-     * @param nivelAcesso
-     */
     public void setNivelAcesso(int nivelAcesso) {
         this.nivelAcesso = nivelAcesso;
     }
@@ -284,20 +154,11 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         return this.getNome().compareTo(outro.getNome());
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public File getArq() {
         return arq;
     }
 
-    /**
-     *
-     * @param codigo
-     * @return
-     */
     public static Pessoa buscaID(int codigo) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -349,11 +210,6 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         return null;
     }
 
-    /**
-     *
-     * @param login
-     * @return
-     */
     public static boolean buscaLogin(String login) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -394,12 +250,6 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         return false;
     }
 
-    /**
-     *
-     * @param login
-     * @param senha
-     * @return
-     */
     public static Pessoa Login(String login, String senha) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -455,9 +305,6 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         return null;
     }
 
-    /**
-     *
-     */
     public static void RelPessoas() {
         FileReader fileReader = null;
         boolean existe = arq.exists();
@@ -489,7 +336,13 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
                         pessoa.setLogin(dados[10]);
                         pessoa.setSenha(dados[11]);
                         pessoa.setNivelAcesso(Integer.parseInt(dados[12]));
-                        listaTodos.add(pessoa);
+                        try {
+                            pessoa.setCompra(Compra.ComprasporPessoa(pessoa.getIdPessoa()));
+                        } catch (NullPointerException e) {
+
+                        } finally {
+                            listaTodos.add(pessoa);
+                        }
 
                     }
                     linha = br.readLine();
@@ -511,15 +364,19 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
             Collections.sort(listaTodos);
             for (Pessoa e : listaTodos) {
                 e.imprimeDados();
+                double valorTotalComprado = 0;
+                for (Compra c : e.getCompra()) {
+                    if (c != null) {
+                        valorTotalComprado += c.getValorTotal();
+                    }
+                }
+                System.out.println("Valor total já comprado pelo cliente: " + e.getNome() + " é: " + valorTotalComprado);
             }
 
         }
 
     }
 
-    /**
-     *
-     */
     public void imprimeDados() {
         System.out.println("\nId:" + this.getIdPessoa());
         System.out.println("Nome:" + this.getNome());
@@ -528,7 +385,10 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         System.out.println("E-mail: " + this.getEmail());
         System.out.println("Local de Trabalho: " + this.getLocalTrabalho());
         System.out.println("Endereço Comercial: " + this.getEnderecoComercial());
-        System.out.println("Data de Nascimento: " + this.getDataNasc());
+        Date data = new Date();
+        data.setTime(this.getDataNasc());
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println("Data de Nascimento: " + format.format(data));
         System.out.println("CPF: " + this.getCPF());
         System.out.println("RG: " + this.getRG());
         System.out.println("Login: " + this.getLogin());
@@ -545,42 +405,35 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         }
         return s;
     }
-    
-    /**
-     *
-     * @param pessoa
-     * @return
-     */
-    public static String TransformarEmLinha(Pessoa pessoa)
-    {
+
+    public static String TransformarEmLinha(Pessoa pessoa) {
         String linha = Integer.toString(pessoa.getIdPessoa())
-            +";"
-            +pessoa.getNome()
-            +";"
-            +pessoa.getEndereco()
-            +";"
-            +pessoa.getTelefone()
-            +";"
-            +pessoa.getEmail()
-            +";"
-            +pessoa.getLocalTrabalho()
-            +";"
-            +pessoa.getEnderecoComercial()
-            +";"
-            +pessoa.getDataNasc().toString()
-            +";"
-            +pessoa.getCPF()
-            +";"
-            +pessoa.getRG()
-            +";"
-            +pessoa.getLogin()
-            +";"
-            +pessoa.getSenha()
-            +";"
-            +Integer.toString(pessoa.getNivelAcesso())
-            +";";
+                + ";"
+                + pessoa.getNome()
+                + ";"
+                + pessoa.getEndereco()
+                + ";"
+                + pessoa.getTelefone()
+                + ";"
+                + pessoa.getEmail()
+                + ";"
+                + pessoa.getLocalTrabalho()
+                + ";"
+                + pessoa.getEnderecoComercial()
+                + ";"
+                + pessoa.getDataNasc().toString()
+                + ";"
+                + pessoa.getCPF()
+                + ";"
+                + pessoa.getRG()
+                + ";"
+                + pessoa.getLogin()
+                + ";"
+                + pessoa.getSenha()
+                + ";"
+                + Integer.toString(pessoa.getNivelAcesso())
+                + ";";
         return linha;
-    
-    
+
     }
 }

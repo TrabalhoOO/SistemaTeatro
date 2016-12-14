@@ -2,30 +2,23 @@ package sistemateatro;
 
 import java.util.Scanner;
 
-/**
- *
- * @author jpdia
- */
 public class TelaEspectador {
 
     private Pessoa pessoa;
 
-    /**
-     *
-     * @param pessoa
-     */
     public TelaEspectador(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
 
     void ConstruirTela() {
-        System.out.println("Usuario:" + this.getPessoa().getNome() + "\nMenu\n");
-        System.out.println("Escolha sua opção: \n");
-        System.out.println("1 - Compras \n");
-        System.out.println("2 - Preferências \n");
-        System.out.println("3 - Sair \n");
+        System.out.println("---------------------------------------------------------------------------------\n");
+        System.out.println("\t\t\t\tM   E   N   U   \n");
+        System.out.println("---------------------------------------------------------------------------------\n");
+        System.out.println("\t-->PARA O VISUALIZAR OU  REALIZAR COMPRAS TECLE                           [1]\n\n");
+        System.out.println("\t-->PARA VISUALIZAR OU CADASTRAR PREFERÊNCIAS                              [2]\n\n");
+        System.out.println("\t-->PARA O SAIR TECLE                                                      [3]\n\n");
+        System.out.println("---------------------------------------------------------------------------------\n");
         Scanner leia = new Scanner(System.in);
-        System.out.println("Informe a opção selecionada: ");
         boolean valido = false;
         int opcao = 0;
         while (!valido) {
@@ -52,12 +45,13 @@ public class TelaEspectador {
                 default:
                     break;
             }
-            System.out.println("Usuario:" + this.getPessoa().getNome() + "\t\t\tMenu\n");
-            System.out.println("Escolha sua opção: \n");
-            System.out.println("1 - Compras \n");
-            System.out.println("2 - Preferências \n");
-            System.out.println("3 - Sair \n");
-            System.out.println("Informe a opção selecionada: ");
+            System.out.println("------------------------------------------------------------------------------\n");
+            System.out.println("\t\t\t\tM   E   N   U   \n");
+            System.out.println("---------------------------------------------------------------------------------\n");
+            System.out.println("\t-->PARA O VISUALIZAR OU  REALIZAR COMPRAS TECLE                           [1]\n\n");
+            System.out.println("\t-->PARA VISUALIZAR OU CADASTRAR PREFERÊNCIAS                              [2]\n\n");
+            System.out.println("\t-->PARA O SAIR TECLE                                                      [3]\n\n");
+            System.out.println("---------------------------------------------------------------------------------\n");
             valido = false;
             opcao = 0;
             while (!valido) {
@@ -77,10 +71,6 @@ public class TelaEspectador {
 
     }
 
-    /**
-     *
-     * @return
-     */
     public Pessoa getPessoa() {
         return pessoa;
     }
@@ -90,12 +80,14 @@ public class TelaEspectador {
     }
 
     private void ConstruirTelaCompra() {
-        System.out.println("Escolha sua opção: \n");
-        System.out.println("1-Realizar Compra\n");
-        System.out.println("2-Visualizar Compras\n");
-        System.out.println("3-Sair\n");
+        System.out.println("---------------------------------------------------------------------------------\n");
+        System.out.println("\t\t\t\tM   E   N   U   \n");
+        System.out.println("---------------------------------------------------------------------------------\n");
+        System.out.println("\t-->PARA REALIZAR COMPRAS TECLE                           		            [1]\n\n");
+        System.out.println("\t-->PARAO VISUALIZAR COMPRAS TECLE                             			[2]\n\n");
+        System.out.println("\t-->PARA O SAIR TECLE                                                      [3]\n\n");
+        System.out.println("---------------------------------------------------------------------------------\n");
         Scanner leia = new Scanner(System.in);
-        System.out.println("Informe a opção selecionada: ");
         CompraDao compra = new CompraDao();
         boolean valido = false;
         int opcao = 0;
@@ -123,11 +115,13 @@ public class TelaEspectador {
                 default:
                     break;
             }
-            System.out.println("Escolha sua opção: \n");
-            System.out.println("1-Realizar Compra\n");
-            System.out.println("2-Visualizar Compras\n");
-            System.out.println("3-Sair\n");
-            System.out.println("Informe a opção selecionada: ");
+            System.out.println("---------------------------------------------------------------------------------\n");
+            System.out.println("\t\t\t\tM   E   N   U   \n");
+            System.out.println("---------------------------------------------------------------------------------\n");
+            System.out.println("\t-->PARA REALIZAR COMPRAS TECLE                           		            [1]\n\n");
+            System.out.println("\t-->PARAO VISUALIZAR COMPRAS TECLE                             			[2]\n\n");
+            System.out.println("\t-->PARA O SAIR TECLE                                                      [3]\n\n");
+            System.out.println("---------------------------------------------------------------------------------\n");
             valido = false;
             opcao = 0;
             while (!valido) {
