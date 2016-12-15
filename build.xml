@@ -30,6 +30,7 @@
 			<include name="Dao.java"/>
 			<include name="EspetaculoDao.java"/>
 			<include name="DataEspetaculoMenorQue3.java"/>
+<include name="SistemaTeatro.java"/>
 			<include name="GeradorID.java"/>
 			<include name="PessoaDao.java"/>
 			<include name="SalaDao.java"/>
