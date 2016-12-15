@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class PessoaDao implements Dao {
@@ -62,8 +63,8 @@ public class PessoaDao implements Dao {
         System.out.println("\nSenha: ");
         String senha = leia.nextLine();
         GeradorID gerador = new GeradorID();
-        int id =gerador.genID(pessoa);
-        if  (id> 0) {
+        int id = gerador.genID(pessoa);
+        if (id > 0) {
             pessoa.setIdPessoa(id);
         } else {
             System.out.println("Erro na inserção");
@@ -260,7 +261,6 @@ public class PessoaDao implements Dao {
             }
         }
     }
-
 
     private void FinalizaAlteracao(Pessoa pessoa, Pessoa newpessoa) {
         newpessoa.setIdPessoa(pessoa.getIdPessoa());
@@ -466,13 +466,12 @@ public class PessoaDao implements Dao {
             try {
                 fw.close();
                 bufferedWriter.close();
-                
 
             } catch (IOException e) {
                 System.out.println("Não foi possível alterar o arquivo");
             }
         }
-        
+
     }
 
     public void Copia(Pessoa pessoa) {
@@ -483,7 +482,7 @@ public class PessoaDao implements Dao {
         Scanner s = null;
         BufferedWriter bufferedWriter = null;
         try {
-            fw = new FileWriter(nf,false);
+            fw = new FileWriter(nf, false);
             s = new Scanner(file);
             bufferedWriter = new BufferedWriter(fw);
             while (s.hasNextLine()) {

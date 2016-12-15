@@ -3,6 +3,7 @@ package sistemateatro;
 import java.io.*;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -155,5 +156,15 @@ public class Sala implements Contavel {
                 + ";";
         return linha;
 
+    }
+    
+    public static void OcupacaoSala(){
+        Scanner leia = new Scanner(System.in);
+        System.out.println("Informe o código da sala");
+        int codSala = Integer.parseInt(leia.nextLine());
+        LinkedList<Integer> assentosOcupados = Compra.totalAssentosComprados(codSala);
+        Sala sala = buscaID(codSala);
+        double porcentagemOcupada = (sala.totalAssentos/assentosOcupados.size())*100;
+        System.out.println("Porcentagem total da ocupação da sala: " + porcentagemOcupada);
     }
 }
