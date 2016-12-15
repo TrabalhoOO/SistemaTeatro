@@ -1,10 +1,7 @@
 package sistemateatro;
 
 import java.io.*;
-import java.util.Date;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -25,7 +22,7 @@ public class Sala implements Contavel {
     /**
      *
      */
-    public LinkedList<Integer> assentosComprados = new LinkedList<Integer>();
+    public LinkedList<Integer> assentosComprados = new LinkedList<>();
     private static final File arq = new File("Dados", "Sala.txt");
 
     /**
@@ -113,35 +110,22 @@ public class Sala implements Contavel {
         this.totalAssentos = totalAssentos;
     }
 
-    /**
-     *
-     * @param assentosComprados
-     */
+   
     public void setAssentosComprados(LinkedList<Integer> assentosComprados) {
         this.assentosComprados.addAll(assentosComprados);
     }
 
-    /**
-     *
-     * @param assentosComprados
-     */
+    
     public void setAssentosComprados(int assentosComprados) {
         this.assentosComprados.add(assentosComprados);
     }
 
-    /**
-     *
-     * @param fk_apresentacao
-     */
+   
     public void setFk_Apresentacao(Apresentacao fk_apresentacao) {
         this.fk_apresentacao = fk_apresentacao;
     }
 
-    /**
-     *
-     * @param codigo
-     * @return
-     */
+    
     public static Sala buscaID(int codigo) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -196,9 +180,7 @@ public class Sala implements Contavel {
         return s;
     }
 
-    /**
-     *
-     */
+    
     public void exibirVagas() {
         for (int i = 0; i < (this.totalAssentos / this.totalFileira); i++) {
             for (int j = 0; j < this.totalFileira; j++) {
@@ -212,20 +194,12 @@ public class Sala implements Contavel {
         }
     }
 
-    /**
-     *
-     * @param assento
-     * @return
-     */
+    
     public boolean HaVaga(int assento) {
         return this.assentosComprados.contains(assento);
     }
 
-    /**
-     *
-     * @param sala
-     * @return
-     */
+   
     public static String TransformarEmLinha(Sala sala) {
         String linha = Integer.toString(sala.getIdSala())
                 + ";"

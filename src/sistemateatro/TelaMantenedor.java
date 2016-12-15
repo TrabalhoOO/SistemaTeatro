@@ -472,7 +472,7 @@ public class TelaMantenedor {
                     Compra.TotalporEspetaculo();
                     break;
                 case 2:
-                    Sala.Ocupacao();
+                    Sala.OcupacaoSala();
                     break;
                 case 3:
                     Pessoa.RelPessoas();

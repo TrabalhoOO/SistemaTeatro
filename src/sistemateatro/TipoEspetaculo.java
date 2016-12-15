@@ -2,13 +2,13 @@
 package sistemateatro;
 
 import java.io.*;
+import java.util.LinkedList;
 
 public class TipoEspetaculo implements Contavel {
 
     static TipoEspetaculo buscaID(int codigo) {
         Reader fileReader = null;
         boolean existe = arq.exists();
-        Espetaculo espetaculo = null;
         try {
             if (existe) {
                 fileReader = new FileReader(arq.getAbsolutePath());
@@ -47,7 +47,46 @@ public class TipoEspetaculo implements Contavel {
         }
         return null;
     }
-    
+    static LinkedList<TipoEspetaculo> buscaTodos() {
+        Reader fileReader = null;
+        boolean existe = arq.exists();
+        try {
+            if (existe) {
+                fileReader = new FileReader(arq.getAbsolutePath());
+                BufferedReader br = new BufferedReader(fileReader);
+                String linha = br.readLine();
+                LinkedList<TipoEspetaculo> tipos = new LinkedList<>();
+                TipoEspetaculo tipoespetaculo = new TipoEspetaculo();
+                while (linha != null) {
+                    linha = TipoEspetaculo.removeUTF8BOM(linha);
+                    if (!(linha.equals(""))) {
+                        String[] dados = linha.split(";");
+
+
+                            tipoespetaculo.setIdTipoEspetaculo(Integer.parseInt(dados[0]));
+                            tipoespetaculo.setNome(dados[1]);
+                            tipoespetaculo.setNome(dados[0]);
+                        
+                    }
+                    tipos.add(tipoespetaculo);
+                    linha = br.readLine();
+                }
+                return tipos;
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Não foi possível alterar o arquivo");
+        } finally {
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                System.out.println("Não foi possível alterar o arquivo");
+            }
+
+        }
+        return null;
+    }
 
     
     private int idTipoEspetaculo;

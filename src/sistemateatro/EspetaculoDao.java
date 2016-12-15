@@ -87,9 +87,26 @@ public class EspetaculoDao implements Dao {
                 data1 = leia.nextLine();
             }
         }
+        System.out.println("Informe o Tipo de Espetáculo: ");
+        int tipoEspetaculo = Integer.parseInt(leia.nextLine());
+        this.espetaculo.setFk_TipoDeEspetaculo(TipoEspetaculo.buscaID(tipoEspetaculo));
+        GeradorID gerador = new GeradorID();
+        int id = gerador.genID(this.espetaculo);
+        if (id > 0) {
+            espetaculo.setIdEspetaculo(id);
+        } else {
+            System.out.println("Erro na inserção");
+        }
+        this.espetaculo.setNome(nome);
+        this.espetaculo.setDataInicio(dt.getTime());
+        this.espetaculo.setDataFim(dt1.getTime());
+        this.espetaculo.setDescricao(descricao);
+        this.espetaculo.setFaixaEtaria(faixaEtaria);
+        this.espetaculo.setDuracaoMinutos(duracaoMinutos);
+        EspetaculoDao.escrever(this.espetaculo);
+    
     }
-
-    public void escrever(Espetaculo espetaculo) {
+    public static void escrever(Espetaculo espetaculo) {
         File arq = espetaculo.getArq();
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
