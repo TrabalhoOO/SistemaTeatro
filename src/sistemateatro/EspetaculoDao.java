@@ -9,8 +9,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.InputMismatchException;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class EspetaculoDao implements Dao {
@@ -33,7 +31,7 @@ public class EspetaculoDao implements Dao {
         System.out.println("informe a quantidade de artistas: ");
         int artistas = Integer.parseInt(leia.nextLine());
         for (int i = 0; i < artistas; i++) {
-            System.out.println("Informe o codigo do " + i + "º artista: ");
+            System.out.println("Informe o codigo do " + i+1 + "º artista: ");
             int codArtista = Integer.parseInt(leia.nextLine());
             Artista artista = Artista.buscaID(codArtista);
             if (artista != null) {
@@ -63,10 +61,18 @@ public class EspetaculoDao implements Dao {
         System.out.println("Informe a data de término: ");
         String data1 = leia.nextLine();
         valido = false;
+        Date dttemp = null;
         Date dt1 = null;
         while (!valido) {
-
+            
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                    dttemp = df.parse(data1);
+                    valido = true;
+                } catch (ParseException ex) {
+                    System.out.println("Data Inválida! Digite Novamente: ");
+                    data1 = leia.nextLine();
+                }
             df.setLenient(false);
             if (dt.compareTo(dt1) < 0) {
                 try {
@@ -165,15 +171,6 @@ public class EspetaculoDao implements Dao {
     }
 
     public void FinalizaAlteracao(Espetaculo espetaculo, Espetaculo newespetaculo) {
-        /*private int idEspetaculo;
-         private String nome;
-        private Date dataInicio;
-        private Date dataFim;
-        private String descricao;
-        private int faixaEtaria;
-                private int duracaoMinutos;
-        private TipoEspetaculo fk_TipoDeEspetaculo;
-        private LinkedList<Artista> fk_Artista = new LinkedList<Artista>();*/
 
         newespetaculo.setIdEspetaculo(espetaculo.getIdEspetaculo());
         newespetaculo.setNome(espetaculo.getNome());
@@ -326,7 +323,7 @@ public class EspetaculoDao implements Dao {
                     System.out.println("Novo tempo: ");
                     try {
                         int valor = Integer.parseInt(leia.nextLine());
-                    
+
                         if (valor > 0) {
                             newespetaculo.setDuracaoMinutos(valor);
                         }

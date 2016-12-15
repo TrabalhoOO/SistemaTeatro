@@ -2,12 +2,19 @@ package sistemateatro;
 
 import java.util.Scanner;
 
+/**
+ *
+ * @author jpdia
+ */
 public class Tela {
 
     private Pessoa pessoa;
     private TelaMantenedor telamantenedor = null;
     private TelaEspectador telaespectador = null;
 
+    /**
+     *
+     */
     public void TelaInicial() {
         System.out.println("Sistema Teatro - versão 1.0 \n");
         System.out.println("1 - Realizar Login\n");
@@ -67,6 +74,9 @@ public class Tela {
         }
     }
 
+    /**
+     *
+     */
     public void RealizarLogin() {
         Scanner leia = new Scanner(System.in);
 

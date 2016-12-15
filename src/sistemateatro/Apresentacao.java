@@ -1,9 +1,13 @@
-package sistemateatro;
+ package sistemateatro;
 
 import java.io.*;
 import java.util.Date;
 import java.util.LinkedList;
 
+/**
+ *
+ * @author jpdia
+ */
 public class Apresentacao implements Contavel {
 
     private int idApresentacao;
@@ -12,72 +16,145 @@ public class Apresentacao implements Contavel {
     private double valorIngresso;
     private Espetaculo fk_Espetaculo;
     private Sala fk_Sala;
+
+    /**
+     *
+     */
     public LinkedList<Compra> compras = new LinkedList<Compra>();
     private static final File arq = new File("Dados", "Apresentacao.txt");
+
+    /**
+     *
+     */
     public static final String UTF8_BOM = "\uFEFF";
 
+    /**
+     *
+     * @return
+     */
     @Override
     public File getArq() {
         return arq;
 
     }
 
+    /**
+     *
+     * @return
+     */
     public int getIdApresentacao() {
         return idApresentacao;
     }
 
+    /**
+     *
+     * @param idApresentacao
+     */
     public void setIdApresentacao(int idApresentacao) {
         this.idApresentacao = idApresentacao;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getData() {
         return this.data.getTime();
     }
 
+    /**
+     *
+     * @param tempo
+     */
     public void setData(Long tempo) {
         this.data = new Date(tempo);
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getHorario() {
         return this.horario.getTime();
     }
 
+    /**
+     *
+     * @param tempo
+     */
     public void setHorario(Long tempo) {
         this.horario = new Date(tempo);
     }
 
+    /**
+     *
+     * @return
+     */
     public double getValorIngresso() {
         return valorIngresso;
     }
 
+    /**
+     *
+     * @param valorIngresso
+     */
     public void setValorIngresso(double valorIngresso) {
         this.valorIngresso = valorIngresso;
     }
 
+    /**
+     *
+     * @return
+     */
     public Espetaculo getFk_Espetaculo() {
         return fk_Espetaculo;
     }
 
+    /**
+     *
+     * @param fk_Espetaculo
+     */
     public void setFk_Espetaculo(Espetaculo fk_Espetaculo) {
         this.fk_Espetaculo = fk_Espetaculo;
     }
 
+    /**
+     *
+     * @return
+     */
     public Sala getFk_Sala() {
         return fk_Sala;
     }
 
+    /**
+     *
+     * @param fk_Sala
+     */
     public void setFk_Sala(Sala fk_Sala) {
         this.fk_Sala = fk_Sala;
     }
 
+    /**
+     *
+     * @return
+     */
     public LinkedList<Compra> getCompras() {
         return compras;
     }
 
+    /**
+     *
+     * @param compras
+     */
     public void setCompras(LinkedList<Compra> compras) {
         this.compras = compras;
     }
 
+    /**
+     *
+     * @param apresentacao
+     * @return
+     */
     public static String TransformarEmLinha(Apresentacao apresentacao) {
         String linha = Integer.toString(apresentacao.getIdApresentacao())
                 + ";"
@@ -97,6 +174,11 @@ public class Apresentacao implements Contavel {
 
     }
 
+    /**
+     *
+     * @param codigoSala
+     * @return
+     */
     public static Apresentacao buscaSala(int codigoSala) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -149,6 +231,11 @@ public class Apresentacao implements Contavel {
         return null;
     }
 
+    /**
+     *
+     * @param codigo
+     * @return
+     */
     public static Apresentacao buscaID(int codigo) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -201,6 +288,11 @@ public class Apresentacao implements Contavel {
         return null;
     }
 
+    /**
+     *
+     * @param dt
+     * @return
+     */
     public static LinkedList<Apresentacao> buscaporData(Long dt) {
         Reader fileReader = null;
         boolean existe = arq.exists();
@@ -253,6 +345,10 @@ public class Apresentacao implements Contavel {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public static LinkedList<Apresentacao> buscaTodos() {
         Reader fileReader = null;
         boolean existe = arq.exists();

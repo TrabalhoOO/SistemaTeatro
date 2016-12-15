@@ -11,11 +11,22 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ *
+ * @author jpdia
+ */
 public class ArtistaDao implements Dao {
 
     Artista artista = new Artista();
+
+    /**
+     *
+     */
     public static final String UTF8_BOM = "\uFEFF";
 
+    /**
+     *
+     */
     @Override
     public void Incluir() {
         Scanner leia = new Scanner(System.in);
@@ -91,6 +102,8 @@ public class ArtistaDao implements Dao {
 
             bufferedWriter.write(Integer.toString(artista.getIDArtista()));
             bufferedWriter.write(";");
+            bufferedWriter.write(artista.getNome());
+            bufferedWriter.write(";");
             bufferedWriter.write(Long.toString(artista.getDataNasc()));
             bufferedWriter.write(";");
             bufferedWriter.write(artista.getCPF());
@@ -120,6 +133,9 @@ public class ArtistaDao implements Dao {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void Alterar() {
         System.out.println("Informe o Código do Artista\n");
@@ -140,6 +156,9 @@ public class ArtistaDao implements Dao {
         this.FinalizaAlteracao(artista, newartista);
     }
 
+    /**
+     *
+     */
     @Override
     public void Excluir() {
         System.out.println("Informe o Código do Artista que deseja excluir\n");
@@ -172,14 +191,13 @@ public class ArtistaDao implements Dao {
         newartista.setRG(artista.getRG());
         newartista.setCelular(artista.getCelular());
         newartista.setEmail(artista.getEmail());
-        System.out.println(
-                "1-Código do Artista\n"
-                + "2-Nome do Artista\n"
-                + "3-Data de Nascimento do Artista\n"
-                + "4-CPF do Artista\n"
-                + "5-RG do Artista\n"
-                + "6-Celular do Artista\n"
-                + "7-Email do Artista\n");
+        System.out.println("1-Nome do Artista\n"
+                + "2-Data de Nascimento do Artista\n"
+                + "3-CPF do Artista\n"
+                + "4-RG do Artista\n"
+                + "5-Celular do Artista\n"
+                + "6-Email do Artista\n"
+                + "7-Sair\n");
         Scanner leia = new Scanner(System.in);
         System.out.println("Informe a opção selecionada");
         boolean valido = false;
@@ -198,24 +216,18 @@ public class ArtistaDao implements Dao {
             }
         }
 
-        while (opcao != 6) {
+        while (opcao != 7) {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Código do Artista: " + artista.getIDArtista());
-                    System.out.println("Novo Código do Artista: ");
-                    int id = Integer.parseInt(leia.nextLine());
-                    newartista.setIDArtista(id);
-                    break;
-                case 2:
-                    System.out.println("Nome do Artista: " + artista.getNome());
+                    System.out.println("Nome do Artista: " + newartista.getNome());
                     System.out.println("Novo Nome do Artista: ");
                     String nome = leia.nextLine();
                     newartista.setNome(nome);
                     break;
-                case 3:
+                case 2:
                     Date data = new Date();
-                    data.setTime(artista.getDataNasc());
+                    data.setTime(newartista.getDataNasc());
                     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                     System.out.println("Data de Nascimento do Artista: " + format.format(data));
                     System.out.println("Nova Data de Nascimento do Artista: ");
@@ -236,33 +248,56 @@ public class ArtistaDao implements Dao {
                         }
                     }
                     break;
-                case 4:
-                    System.out.println("CPF do Artista: " + artista.getCPF());
+                case 3:
+                    System.out.println("CPF do Artista: " + newartista.getCPF());
                     System.out.println("Novo CPF do Artista: ");
                     String cpf = leia.nextLine();
                     newartista.setCPF(cpf);
                     break;
-                case 5:
-                    System.out.println("RG do Artista: " + artista.getRG());
+                case 4:
+                    System.out.println("RG do Artista: " + newartista.getRG());
                     System.out.println("Novo RG do Artista: ");
                     String rg = leia.nextLine();
                     newartista.setRG(rg);
                     break;
-                case 6:
-                    System.out.println("Celular do Artista: " + artista.getCelular());
+                case 5:
+                    System.out.println("Celular do Artista: " + newartista.getCelular());
                     System.out.println("Novo Celular do Artista: ");
                     String celular = leia.nextLine();
                     newartista.setCelular(celular);
                     break;
-                case 7:
-                    System.out.println("Email do Artista: " + artista.getEmail());
+                case 6:
+                    System.out.println("Email do Artista: " + newartista.getEmail());
                     System.out.println("Novo Email do Artista: ");
                     String email = leia.nextLine();
                     newartista.setEmail(email);
                     break;
 
             }
+            System.out.println(
+                    "1-Nome do Artista\n"
+                    + "2-Data de Nascimento do Artista\n"
+                    + "3-CPF do Artista\n"
+                    + "4-RG do Artista\n"
+                    + "5-Celular do Artista\n"
+                    + "6-Email do Artista\n");
+            leia = new Scanner(System.in);
+            System.out.println("Informe a opção selecionada");
+            valido = false;
+            opcao = 0;
+            while (!valido) {
 
+                try {
+                    opcao = Integer.parseInt(leia.nextLine());
+                    valido = true;
+                } catch (NumberFormatException e) {
+                    {
+                        System.out.println("Valor inválido! Digite Novamente: ");
+                        opcao = Integer.parseInt(leia.nextLine());
+                    }
+
+                }
+            }
         }
         this.Copia(artista, newartista);
     }

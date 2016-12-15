@@ -56,14 +56,35 @@ public class TipoEspetaculoDao implements Dao {
 
     @Override
     public void Excluir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Informe o Código do Tipo de Espetáculo que deseja excluir\n");
+        Scanner leia = new Scanner(System.in);
+        int codigo = 0;
+        try {
+            codigo = leia.nextInt();
+        } catch (InputMismatchException e) {
+            boolean valido = false;
+            while (!valido) {
+                System.out.println("Valor Inválido");
+                codigo = leia.nextInt();
+            }
+        }
+        TipoEspetaculo tipoespetaculo = TipoEspetaculo.buscaID(codigo);
+        if (tipoespetaculo != null) {
+            this.Copia(tipoespetaculo);
+
+        } else {
+            System.out.println("Tipo de Espetaculo não encontrado! Exclusão Cancelada");
+
+        }
+
     }
+
+    
 
     private void FinalizaAlteracao(TipoEspetaculo tipoEspetaculo, TipoEspetaculo newTipoEspetaculo) {
         newTipoEspetaculo.setIdTipoEspetaculo(tipoEspetaculo.getIdTipoEspetaculo());
         newTipoEspetaculo.setNome(tipoEspetaculo.getNome());
         newTipoEspetaculo.setDescricao(tipoEspetaculo.getDescricao());
-        newTipoEspetaculo.setPreferencia(tipoEspetaculo.getPreferencia());
         System.out.println(
                 "1-Tipo do Espetáculo\n"
                 + "2-Descrição do Tipo do Espetáculo\n"

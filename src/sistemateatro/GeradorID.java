@@ -7,8 +7,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 
+/**
+ *
+ * @author jpdia
+ */
 public class GeradorID {
 
+    /**
+     *
+     * @param contavel
+     * @return
+     */
     public int genID(Contavel contavel) {
         if(!contavel.getArq().exists())
         {

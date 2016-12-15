@@ -119,7 +119,7 @@ public class Artista implements Contavel {
         }
         return null;
     }
-
+    
     public static String TransformarEmLinha(Artista artista) {
         String linha = Integer.toString(artista.getIDArtista())
                 + ";"
@@ -139,7 +139,7 @@ public class Artista implements Contavel {
 
     }
 
-    private static String removeUTF8BOM(String s) {
+   private static String removeUTF8BOM(String s) {
         if (s.startsWith(UTF8_BOM)) {
             s = s.substring(1);
         }

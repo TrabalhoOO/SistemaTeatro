@@ -3,6 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+=======
             <file>file:/C:/Users/Pedro/Desktop/Pedro/Faculdade/3º%20Período/Orientação%20a%20objetos/SistemaTeatro/src/sistemateatro/Dao.java</file>
             <file>file:/C:/Users/Pedro/Desktop/Pedro/Faculdade/3º%20Período/Orientação%20a%20objetos/SistemaTeatro/src/sistemateatro/Apresentacao.java</file>
             <file>file:/C:/Users/Pedro/Desktop/Pedro/Faculdade/3º%20Período/Orientação%20a%20objetos/SistemaTeatro/src/sistemateatro/Espetaculo.java</file>
@@ -23,10 +25,8 @@
             <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/EspetaculoDao.java</file>
             <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/Espectador.java</file>
             <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/CompraDao.java</file>
+>>>>>>> f6602759d8d7cbd8c96295b671ca6bcdbc630fdf
             <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/Apresentacao.java</file>
-            <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/Tela.java</file>
-            <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/TelaEspectador.java</file>
-            <file>file:/C:/Users/jpdia/Documents/SistemaTeatro/src/sistemateatro/TelaMantenedor.java</file>
         </group>
     </open-files>
 </project-private>

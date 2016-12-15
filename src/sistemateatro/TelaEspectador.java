@@ -11,13 +11,14 @@ public class TelaEspectador {
     }
 
     void ConstruirTela() {
-        System.out.println("Usuario:" + this.getPessoa().getNome() + "\nMenu\n");
-        System.out.println("Escolha sua opção: \n");
-        System.out.println("1 - Compras \n");
-        System.out.println("2 - Preferências \n");
-        System.out.println("3 - Sair \n");
+        System.out.println("---------------------------------------------------------------------------------\n");
+        System.out.println("\t\t\t\tM   E   N   U   \n");
+        System.out.println("---------------------------------------------------------------------------------\n");
+        System.out.println("\t-->PARA O VISUALIZAR OU  REALIZAR COMPRAS TECLE                           [1]\n\n");
+        System.out.println("\t-->PARA VISUALIZAR OU CADASTRAR PREFERÊNCIAS                              [2]\n\n");
+        System.out.println("\t-->PARA O SAIR TECLE                                                      [3]\n\n");
+        System.out.println("---------------------------------------------------------------------------------\n");
         Scanner leia = new Scanner(System.in);
-        System.out.println("Informe a opção selecionada: ");
         boolean valido = false;
         int opcao = 0;
         while (!valido) {
@@ -44,12 +45,13 @@ public class TelaEspectador {
                 default:
                     break;
             }
-            System.out.println("Usuario:" + this.getPessoa().getNome() + "\t\t\tMenu\n");
-            System.out.println("Escolha sua opção: \n");
-            System.out.println("1 - Compras \n");
-            System.out.println("2 - Preferências \n");
-            System.out.println("3 - Sair \n");
-            System.out.println("Informe a opção selecionada: ");
+            System.out.println("------------------------------------------------------------------------------\n");
+            System.out.println("\t\t\t\tM   E   N   U   \n");
+            System.out.println("---------------------------------------------------------------------------------\n");
+            System.out.println("\t-->PARA O VISUALIZAR OU  REALIZAR COMPRAS TECLE                           [1]\n\n");
+            System.out.println("\t-->PARA VISUALIZAR OU CADASTRAR PREFERÊNCIAS                              [2]\n\n");
+            System.out.println("\t-->PARA O SAIR TECLE                                                      [3]\n\n");
+            System.out.println("---------------------------------------------------------------------------------\n");
             valido = false;
             opcao = 0;
             while (!valido) {
@@ -78,11 +80,15 @@ public class TelaEspectador {
     }
 
     private void ConstruirTelaCompra() {
-        System.out.println("Escolha sua opção: \n");
-        System.out.println("1-Realizar Compra\n");
-        System.out.println("2-Visualizar Compras\n");
+        System.out.println("---------------------------------------------------------------------------------\n");
+        System.out.println("\t\t\t\tM   E   N   U   \n");
+        System.out.println("---------------------------------------------------------------------------------\n");
+        System.out.println("\t-->PARA REALIZAR COMPRAS TECLE                           		            [1]\n\n");
+        System.out.println("\t-->PARAO VISUALIZAR COMPRAS TECLE                             			[2]\n\n");
+        System.out.println("\t-->PARA O SAIR TECLE                                                      [3]\n\n");
+        System.out.println("---------------------------------------------------------------------------------\n");
         Scanner leia = new Scanner(System.in);
-        System.out.println("Informe a opção selecionada: ");
+        CompraDao compra = new CompraDao();
         boolean valido = false;
         int opcao = 0;
         while (!valido) {
@@ -96,6 +102,40 @@ public class TelaEspectador {
                     opcao = Integer.parseInt(leia.nextLine());
                 }
 
+            }
+        }
+        while (opcao != 3) {
+            switch (opcao) {
+                case 1:
+                    compra.Incluir();
+                    break;
+                case 2:
+                    compra.VisulizarCompra(this.pessoa.getIdPessoa());
+                    break;
+                default:
+                    break;
+            }
+            System.out.println("---------------------------------------------------------------------------------\n");
+            System.out.println("\t\t\t\tM   E   N   U   \n");
+            System.out.println("---------------------------------------------------------------------------------\n");
+            System.out.println("\t-->PARA REALIZAR COMPRAS TECLE                           		            [1]\n\n");
+            System.out.println("\t-->PARAO VISUALIZAR COMPRAS TECLE                             			[2]\n\n");
+            System.out.println("\t-->PARA O SAIR TECLE                                                      [3]\n\n");
+            System.out.println("---------------------------------------------------------------------------------\n");
+            valido = false;
+            opcao = 0;
+            while (!valido) {
+
+                try {
+                    opcao = Integer.parseInt(leia.nextLine());
+                    valido = true;
+                } catch (NumberFormatException e) {
+                    {
+                        System.out.println("Valor inválido! Digite Novamente: ");
+                        opcao = Integer.parseInt(leia.nextLine());
+                    }
+
+                }
             }
         }
     }

@@ -1,3 +1,4 @@
+
 package sistemateatro;
 
 import java.io.*;
@@ -214,13 +215,7 @@ public class Espetaculo implements Contavel {
 
     public static String TransformarEmLinha(Espetaculo espetaculo) {
 
-        /*private String nome;
-        private Date dataInicio;
-        private Date dataFim;
-        private String descricao;
-        private int faixaEtaria;
-        private int duracaoMinutos;
-        private TipoEspetaculo fk_TipoDeEspetaculo;*/
+       
         String linha = Integer.toString(espetaculo.getIdEspetaculo())
                 + ";"
                 + espetaculo.getIdEspetaculo()
@@ -412,3 +407,4 @@ public class Espetaculo implements Contavel {
     }
 
 }
+

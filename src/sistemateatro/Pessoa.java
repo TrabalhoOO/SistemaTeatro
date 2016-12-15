@@ -1,6 +1,7 @@
 package sistemateatro;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
@@ -335,7 +336,13 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
                         pessoa.setLogin(dados[10]);
                         pessoa.setSenha(dados[11]);
                         pessoa.setNivelAcesso(Integer.parseInt(dados[12]));
-                        listaTodos.add(pessoa);
+                        try {
+                            pessoa.setCompra(Compra.ComprasporPessoa(pessoa.getIdPessoa()));
+                        } catch (NullPointerException e) {
+
+                        } finally {
+                            listaTodos.add(pessoa);
+                        }
 
                     }
                     linha = br.readLine();
@@ -357,6 +364,13 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
             Collections.sort(listaTodos);
             for (Pessoa e : listaTodos) {
                 e.imprimeDados();
+                double valorTotalComprado = 0;
+                for (Compra c : e.getCompra()) {
+                    if (c != null) {
+                        valorTotalComprado += c.getValorTotal();
+                    }
+                }
+                System.out.println("Valor total já comprado pelo cliente: " + e.getNome() + " é: " + valorTotalComprado);
             }
 
         }
@@ -371,7 +385,10 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         System.out.println("E-mail: " + this.getEmail());
         System.out.println("Local de Trabalho: " + this.getLocalTrabalho());
         System.out.println("Endereço Comercial: " + this.getEnderecoComercial());
-        System.out.println("Data de Nascimento: " + this.getDataNasc());
+        Date data = new Date();
+        data.setTime(this.getDataNasc());
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println("Data de Nascimento: " + format.format(data));
         System.out.println("CPF: " + this.getCPF());
         System.out.println("RG: " + this.getRG());
         System.out.println("Login: " + this.getLogin());
@@ -388,37 +405,35 @@ public class Pessoa implements Comparable<Pessoa>, Contavel {
         }
         return s;
     }
-    
-    public static String TransformarEmLinha(Pessoa pessoa)
-    {
+
+    public static String TransformarEmLinha(Pessoa pessoa) {
         String linha = Integer.toString(pessoa.getIdPessoa())
-            +";"
-            +pessoa.getNome()
-            +";"
-            +pessoa.getEndereco()
-            +";"
-            +pessoa.getTelefone()
-            +";"
-            +pessoa.getEmail()
-            +";"
-            +pessoa.getLocalTrabalho()
-            +";"
-            +pessoa.getEnderecoComercial()
-            +";"
-            +pessoa.getDataNasc().toString()
-            +";"
-            +pessoa.getCPF()
-            +";"
-            +pessoa.getRG()
-            +";"
-            +pessoa.getLogin()
-            +";"
-            +pessoa.getSenha()
-            +";"
-            +Integer.toString(pessoa.getNivelAcesso())
-            +";";
+                + ";"
+                + pessoa.getNome()
+                + ";"
+                + pessoa.getEndereco()
+                + ";"
+                + pessoa.getTelefone()
+                + ";"
+                + pessoa.getEmail()
+                + ";"
+                + pessoa.getLocalTrabalho()
+                + ";"
+                + pessoa.getEnderecoComercial()
+                + ";"
+                + pessoa.getDataNasc().toString()
+                + ";"
+                + pessoa.getCPF()
+                + ";"
+                + pessoa.getRG()
+                + ";"
+                + pessoa.getLogin()
+                + ";"
+                + pessoa.getSenha()
+                + ";"
+                + Integer.toString(pessoa.getNivelAcesso())
+                + ";";
         return linha;
-    
-    
+
     }
 }

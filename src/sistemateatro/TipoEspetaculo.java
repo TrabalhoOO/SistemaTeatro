@@ -1,20 +1,58 @@
+
 package sistemateatro;
 
 import java.io.*;
-import java.util.Date;
-import java.util.LinkedList;
 
 public class TipoEspetaculo implements Contavel {
 
-    static TipoEspetaculo buscaID(int parseInt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    static TipoEspetaculo buscaID(int codigo) {
+        Reader fileReader = null;
+        boolean existe = arq.exists();
+        Espetaculo espetaculo = null;
+        try {
+            if (existe) {
+                fileReader = new FileReader(arq.getAbsolutePath());
+                BufferedReader br = new BufferedReader(fileReader);
+                String linha = br.readLine();
+                TipoEspetaculo tipoespetaculo = new TipoEspetaculo();
+                while (linha != null) {
+                    linha = TipoEspetaculo.removeUTF8BOM(linha);
+                    if (!(linha.equals(""))) {
+                        String[] dados = linha.split(";");
+
+                        int id = Integer.parseInt(dados[0]);
+
+                        if (id == codigo) {
+                            tipoespetaculo.setIdTipoEspetaculo(Integer.parseInt(dados[0]));
+                            tipoespetaculo.setNome(dados[1]);
+                            tipoespetaculo.setNome(dados[0]);
+                        }
+                    }
+
+                    linha = br.readLine();
+                }
+                return tipoespetaculo;
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("Não foi possível alterar o arquivo");
+        } finally {
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+                System.out.println("Não foi possível alterar o arquivo");
+            }
+
+        }
+        return null;
     }
+    
 
     
     private int idTipoEspetaculo;
     private String nome;
     private String descricao;
-    public Preferencia preferencia;
     private static final File arq = new File("Dados", "TipoEspetaculo.txt");
     public static final String UTF8_BOM = "\uFEFF";
 
@@ -42,13 +80,6 @@ public class TipoEspetaculo implements Contavel {
         this.nome = nome;
     }
 
-    public Preferencia getPreferencia() {
-        return preferencia;
-    }
-
-    public void setPreferencia(Preferencia preferencia) {
-        this.preferencia = preferencia;
-    }
 
     @Override
     public File getArq() {
@@ -61,11 +92,15 @@ public class TipoEspetaculo implements Contavel {
                 + tipoEspetaculo.getNome()
                 + ";"
                 + tipoEspetaculo.getDescricao()
-                + ";"
-                + tipoEspetaculo.getPreferencia()                
                 + ";";
         return linha;
 
+    }
+    private static String removeUTF8BOM(String s) {
+        if (s.startsWith(UTF8_BOM)) {
+            s = s.substring(1);
+        }
+        return s;
     }
 
 }
